@@ -1,0 +1,62 @@
+/**
+ * Design System Tokens — Retro Geek Dark Theme
+ *
+ * Central source of truth for all CSS custom properties.
+ * Mirrors the former UnoCSS theme in uno.config.ts so that any
+ * component can reference tokens directly without a build-time
+ * class-name lookup.
+ */
+
+:root {
+  /* Typography */
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+
+  /* Backgrounds */
+  --bg-primary:   #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-tertiary:  #1a1a1a;
+
+  /* Text */
+  --text-primary:   #e8e6e3;
+  --text-secondary: #8a8785;
+  --text-muted:     #5c5958;
+  --text-prose:     #a8a7a5; /* prose body (p, li) */
+  --text-td:        #c5c4c2; /* table data cells */
+  --text-bold:      #ffffff; /* strong/b emphasis */
+
+  /* Accent */
+  --accent:       #d4a853;
+  --accent-dim:   #8b7038;
+  --accent-hover: #e8c678;
+
+  /* Structural */
+  --border: #2a2a2a;
+  --glow:   rgba(212, 168, 83, 0.15);
+
+  /* Message bubbles */
+  /* Human messages are darker — dense, user-authored input */
+  --human-msg-bg:          #0c0c0c;
+  --human-msg-border:      #1c1c1c;
+  /* Agent messages are lighter — elevated document surface, machine output */
+  --agent-msg-bg:     #181818;
+  --agent-msg-border: #272727;
+
+  /* Redacted content (TV-static noise) */
+  --redacted-bg:         #0d0808;
+  --redacted-border:     #4a2020;
+  --redacted-label:      #ff5555;
+  --redacted-label-glow: rgba(255, 85, 85, 0.6);
+  --redacted-glow:       rgba(255, 85, 85, 0.08);
+
+  /* Collapsible panel type colours */
+  --collapsible-error-border:   #ef4444;
+  --collapsible-error-accent:   #f87171;
+  --collapsible-session-border: #10b981;
+  --collapsible-session-accent: #34d399;
+  --collapsible-custom-border:  #6366f1;
+  --collapsible-custom-accent:  #818cf8;
+  --collapsible-muted-border:   #6b7280;
+  --collapsible-muted-accent:   #9ca3af;
+}
