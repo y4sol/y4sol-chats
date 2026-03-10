@@ -1,0 +1,221 @@
+title: Scrapling 框架分析
+description: AI 深度分析 Web 爬虫框架 Scrapling
+date: "2026-03-10"
+sessionId: "xxxxxx"
+channel: discord
+model: MiniMax-M2.5
+totalMessages: 3
+totalTokens: 26895
+visibility: public
+defaultShowProcess: false
+participants:
+  Z3R0:
+    role: human
+  AI:
+    role: agent
+    model: MiniMax-M2.5
+
+timeline:
+  - type: message
+    role: human
+    speaker: Z3R0
+    timestamp: "2026-03-10T22:18:00.000Z"
+    content: |
+      https://github.com/D4Vinci/Scrapling深度分析
+
+  - type: message
+    role: agent
+    speaker: AI
+    timestamp: "2026-03-10T22:19:00.000Z"
+    content: |
+      # 🕷️ Scrapling 深度分析
+
+      ## 1. 核心定位
+
+      **自适应 Web Scraping 框架** — 从单次请求到全规模爬取一体化解决方案。
+
+      - **类型**: 企业级爬虫框架
+      - **特点**: 智能页面变化适应 + 反爬虫绕过 + 完整爬虫架构
+      - **⭐ 评分**: ⭐⭐⭐⭐⭐ (27.9k Stars, 2k+ Forks)
+
+      ---
+
+      ## 2. 架构 (文本流程图)
+
+      ```
+      用户代码
+          ↓
+      ┌─────────────────────────────────────────────────────────┐
+      │                    Scrapling 框架                        │
+      ├─────────────────────────────────────────────────────────┤
+      │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │
+      │  │   Fetcher   │  │   Spider    │  │    MCP      │    │
+      │  │  (HTTP)     │  │  (爬虫)      │  │  Server     │    │
+      │  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘    │
+      │         │                │                │             │
+      │  ┌──────┴──────┐  ┌──────┴──────┐         │             │
+      │  │ Stealthy    │  │  Scheduler  │         │             │
+      │  │ Dynamic     │  │  Engine     │         │             │
+      │  └──────┬──────┘  └──────┬──────┘         │             │
+      │         │                │                │             │
+      │  ┌──────┴────────────────┴────────────────┴──────┐      │
+      │  │              Parser (自适应解析器)               │      │
+      │  │    • CSS/XPath 选择器                          │      │
+      │  │    • 智能元素追踪 (页面变化适应)                  │      │
+      │  │    • 相似元素查找                               │      │
+      │  └───────────────────────────────────────────────┘      │
+      └─────────────────────────────────────────────────────────┘
+               ↓              ↓              ↓
+         HTTP/3 请求    Playwright     AI Agent
+         TLS指纹伪装   浏览器自动化    (Claude/Cursor)
+      ```
+
+      ---
+
+      ## 3. 技术栈
+
+      | 模块 | 技术 |
+      |------|------|
+      | **HTTP 请求** | `requests` + TLS 指纹伪装 + HTTP/3 |
+      | **浏览器** | Playwright (Chromium) + Chrome |
+      | **反爬绕过** | Cloudflare Turnstile/Interstitial |
+      | **异步** | `asyncio` |
+      | **代理轮换** | 内置 `ProxyRotator` |
+      | **AI 集成** | MCP Server (Claude/Cursor) |
+      | **爬虫架构** | 类 Scrapy 设计 |
+      | **序列化** | 自研 Fast JSON (比标准库快 10x) |
+
+      ---
+
+      ## 4. 使用方式
+
+      ### 快速开始 (单次请求)
+      ```python
+      from scrapling.fetchers import StealthyFetcher
+
+      # 绕过 Cloudflare + 自动元素追踪
+      StealthyFetcher.adaptive = True
+      p = StealthyFetcher.fetch('https://example.com', headless=True, network_idle=True)
+
+      # 自适应选择器 - 网站改版也能找到
+      products = p.css('.product', adaptive=True)
+      ```
+
+      ### 完整爬虫
+      ```python
+      from scrapling.spiders import Spider, Response
+
+      class MySpider(Spider):
+          name = "demo"
+          start_urls = ["https://example.com/"]
+          
+          async def parse(self, response: Response):
+              for item in response.css('.product'):
+                  yield {"title": item.css('h2::text').get()}
+
+      # 启动爬虫 (支持流式输出、暂停恢复)
+      MySpider().start()
+      ```
+
+      ### CLI 用法
+      ```bash
+      # 无需写代码，直接命令行爬取
+      scrapling https://example.com -s ".title::text"
+      ```
+
+      ### MCP Server (AI Agent 用)
+      ```bash
+      # 启动 MCP Server
+      uvx scrapling mcp
+      ```
+
+      ---
+
+      ## 5. 核心机制
+
+      ### 🔄 自适应解析 (Adaptive Parsing)
+      - **智能元素追踪**: 记录元素特征 (文本、结构、位置)
+      - **页面变化适应**: 网站改版后自动重新定位元素
+      - **相似元素查找**: 找到的元素可用于发现更多相似元素
+
+      ### 🛡️ 反爬虫绕过
+      - **TLS 指纹**: 模拟真实浏览器 TLS 握手
+      - **Header 伪装**: 自动生成真实浏览器 Header
+      - **Cloudflare Turnstile**: 内置绕过 (无需手动解验证码)
+      - **Playwright 浏览器**: 完全自动化浏览器指纹
+
+      ### 🕷️ 爬虫框架
+      - **并发控制**: 可配置并发数、域名限速、下载延迟
+      - **多会话**: 统一接口管理 HTTP + 浏览器会话
+      - **暂停/恢复**: Checkpoint 机制，Ctrl+C 优雅关机
+      - **流式输出**: `async for item in spider.stream()` 实时推送
+
+      ### 🔀 代理轮换
+      - 内置 `ProxyRotator` 
+      - 支持循环/自定义策略
+      - 支持单请求代理覆盖
+
+      ---
+
+      ## 6. 外部集成
+
+      | 集成 | 用途 |
+      |------|------|
+      | **MCP Server** | AI Agent (Claude/Cursor) 调用 |
+      | **Playwright** | 动态页面渲染 |
+      | **代理服务商** | DataImpulse, BirdProxies, Evomi, Decodo |
+      | **反爬 API** | Hyper Solutions (Akamai/DataDome/Kasada) |
+      | **CLI** | 终端直接爬取 |
+      | **IPython Shell** | 交互式调试 + curl 转代码 |
+
+      ---
+
+      ## 7. 优缺点对比
+
+      | 维度 | 优点 | 缺点 |
+      |------|------|------|
+      | **易用性** | API 简洁，文档丰富 | 功能太多，学习曲线略陡 |
+      | **反爬能力** | 开箱即用 Cloudflare 绕过 | 复杂反爬仍需企业级方案 |
+      | **性能** | Fast JSON 快 10x，内存优化 | 大量并发仍需优化 |
+      | **稳定性** | 92% 测试覆盖，类型提示完整 | 依赖 Playwright，体积较大 |
+      | **扩展性** | MCP + Spider Hooks 丰富 | 插件生态较弱 |
+      | **社区** | 27k Stars，活跃开发 | 中文资料较少 |
+
+      ---
+
+      ## 8. 对比同类工具
+
+      | 工具 | 类型 | 反爬 | 难度 | 适合场景 |
+      |------|------|------|------|----------|
+      | **Scrapling** | 框架 | ⭐⭐⭐⭐ | 中 | 企业级爬虫 + AI 集成 |
+      | **Playwright** | 工具库 | ⭐⭐ | 低 | 简单动态页面 |
+      | **Scrapy** | 框架 | ⭐⭐ | 高 | 大型爬虫项目 |
+      | **Selenium** | 工具库 | ⭐ | 低 | 简单自动化测试 |
+      | **Puppeteer** | 工具库 | ⭐⭐ | 中 | Node.js 项目 |
+
+      ---
+
+      ## 总结
+
+      Scrapling 是一个 **功能完备的企业级爬虫框架**，核心亮点：
+
+      1. **自适应解析** — 解决网站改版痛点
+      2. **开箱即用的反爬** — Cloudflare Turnstile 绕过
+      3. **完整爬虫架构** — 暂停恢复、流式输出、代理轮换
+      4. **AI 集成** — MCP Server 支持 Claude/Cursor
+
+      适合需要 **稳定爬取 + 长期维护** 的项目。复杂度高于 Playwright，但长期维护成本更低。
+
+  - type: message
+    role: human
+    speaker: Z3R0
+    timestamp: "2026-03-10T22:19:00.000Z"
+    content: |
+      记到笔记
+
+  - type: message
+    role: agent
+    speaker: AI
+    timestamp: "2026-03-10T22:19:00.000Z"
+    content: |
+      ✅ 已保存到 `notes/research/2026-03-10-Scrapling分析.md`
