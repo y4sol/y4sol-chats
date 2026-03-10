@@ -1,0 +1,176 @@
+---
+import ChatLayout from '../../../layouts/ChatLayout.astro';
+import ChatMessage from '../../../components/ChatMessage.astro';
+import { CollapsibleMessage } from '../../../components/CollapsibleMessage';
+import { ShowProcessToggle } from '../../../components/ShowProcessToggle';
+import { AVATAR_COLORS } from '../../../constants/index.js';
+import {
+  getAllChatsWithContent,
+  type ChatWithContent,
+  type ChatMessage as ChatMsg,
+  type ChatEvent,
+  type ProcessBlock,
+} from '../../../lib/chats';
+import { getProjectConfig } from '../../../lib/config.js';
+import {
+  isSpeakerAgent,
+  buildToolCallContent,
+  expandEventToDirective,
+  type RenderItem,
+} from '../../../lib/timeline-utils';
+
+export async function getStaticPaths() {
+  return (await getAllChatsWithContent()).map(chat => ({
+    params: { slug: chat.slug },
+    props: { chat },
+  }));
+}
+
+interface Props {
+  chat: ChatWithContent;
+}
+
+const { chat } = Astro.props;
+const { title, description, channel, model, date, totalMessages, timeline, participants, defaultShowProcess = false, cover, slug } = chat;
+const displayTitle = title || '';
+
+const showProcessByDefault = defaultShowProcess;
+
+const config = await getProjectConfig();
+const siteUrl = config.site?.replace(/\/$/, '') ?? '';
+const ogImageUrl = cover ?? (siteUrl ? `${siteUrl}/chats/${slug}/cover.svg` : undefined);
+
+// Build flat render list from the timeline
+const messages: RenderItem[] = [];
+for (const item of timeline) {
+  if (item.type === 'message') {
+    const msg = item as ChatMsg;
+    const speaker = msg.speaker || msg.role;
+    const isUser = !isSpeakerAgent(speaker, participants);
+
+    // Process blocks (thinking, tool calls)
+    for (const block of msg.process || []) {
+      if (block.type === 'thinking') {
+        messages.push({
+          kind: 'directive',
+          speaker,
+          timestamp: msg.timestamp,
+          isUser,
+          type: 'thinking_level_change',
+          icon: '🧠',
+          label: 'Thinking',
+          content: block.content,
+          collapsed: block.collapsed ?? false,
+        });
+      } else if (block.type === 'tool_call') {
+        const isError = block.result?.isError ?? false;
+        messages.push({
+          kind: 'directive',
+          speaker,
+          timestamp: msg.timestamp,
+          isUser,
+          type: isError ? 'error' : 'custom',
+          icon: isError ? '⚠️' : '🔧',
+          label: block.title ?? `Tool Call - ${block.name}${block.arguments.file_path ? ` · ${block.arguments.file_path}` : ''}`,
+          content: buildToolCallContent(block as Extract<ProcessBlock, { type: 'tool_call' }>),
+          collapsed: block.collapsed ?? false,
+        });
+      }
+    }
+
+    // Text content
+    if (msg.content) {
+      messages.push({
+        kind: 'text',
+        speaker,
+        timestamp: msg.timestamp,
+        isUser,
+        content: msg.content,
+      });
+    }
+  } else {
+    const event = item as ChatEvent;
+    const e = event as Record<string, unknown>;
+    const eventSpeaker = String(e.speaker || '');
+    const directive = expandEventToDirective(event);
+    messages.push({
+      kind: 'directive',
+      speaker: eventSpeaker,
+      timestamp: event.timestamp,
+      isUser: eventSpeaker ? !isSpeakerAgent(eventSpeaker, participants) : false,
+      type: directive.type,
+      icon: directive.icon,
+      label: directive.label,
+      content: directive.content,
+      collapsed: directive.collapsed,
+    });
+  }
+}
+
+const hasProcessMessages = messages.some(msg => msg.kind === 'directive');
+const regularMessageCount = messages.filter(msg => msg.kind !== 'directive').length;
+
+// Create avatar color mapping for unique human authors
+const authorColorMap = new Map<string, number>();
+let colorIndex = 0;
+messages.forEach(msg => {
+  if (msg.speaker && !isSpeakerAgent(msg.speaker, participants) && !authorColorMap.has(msg.speaker)) {
+    authorColorMap.set(msg.speaker, colorIndex % AVATAR_COLORS.length);
+    colorIndex++;
+  }
+});
+---
+
+<ChatLayout
+  title={displayTitle}
+  description={description || undefined}
+  channel={channel}
+  model={model}
+  date={date}
+  messageCount={totalMessages}
+  regularMessageCount={regularMessageCount}
+  showProcessByDefault={showProcessByDefault}
+  ogImageUrl={ogImageUrl}
+>
+  {hasProcessMessages && (
+    <ShowProcessToggle client:load slot="controls" defaultShow={showProcessByDefault} />
+  )}
+
+  {messages.map((msg, index) => {
+    const isFirstInGroup = index === 0 || messages[index - 1].speaker !== msg.speaker;
+    const isLastInGroup = index === messages.length - 1 || messages[index + 1].speaker !== msg.speaker;
+
+    if (msg.kind === 'directive') {
+      const avatarColorIndex = msg.speaker && !isSpeakerAgent(msg.speaker, participants) ? authorColorMap.get(msg.speaker) : undefined;
+      return (
+        <CollapsibleMessage
+          client:visible
+          type={msg.type}
+          icon={msg.icon}
+          label={msg.label}
+          collapsed={msg.collapsed}
+          content={msg.content}
+          author={msg.speaker}
+          timestamp={msg.timestamp}
+          isFirstInGroup={isFirstInGroup}
+          isLastInGroup={isLastInGroup}
+          avatarColorIndex={avatarColorIndex}
+        />
+      );
+    }
+
+    const avatarColorIndex = msg.speaker && !isSpeakerAgent(msg.speaker, participants) ? authorColorMap.get(msg.speaker) : undefined;
+    return (
+      <ChatMessage
+        author={msg.speaker}
+        timestamp={msg.timestamp}
+        content={msg.content}
+        isUser={msg.isUser}
+        isFirstInGroup={isFirstInGroup}
+        isLastInGroup={isLastInGroup}
+        avatarColorIndex={avatarColorIndex}
+      />
+    );
+  })}
+
+</ChatLayout>
