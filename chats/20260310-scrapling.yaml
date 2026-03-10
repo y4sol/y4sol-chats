@@ -718,10 +718,3 @@ timeline:
   timestamp: 2026-03-10 14:40:05.968000+00:00
   model: MiniMax-M2.5
   content: ✅ 已保存到 `notes/research/2026-03-10-Scrapling分析.md`
-- type: message
-  role: human
-  speaker: Z3R0
-  timestamp: 2026-03-10 14:40:58.768000+00:00
-  content: Use the "chats-share" skill for this request.
-description: AI 深度分析 Web 爬虫框架 Scrapling
-channel: discord
