@@ -6,5 +6,5 @@ base = "chats"
 
 [template.options]
 title = "y4sol-chats"
-subtitle = "// Conversations between Z3R0 and his AI agent y4sol"
+subtitle = "Conversations between Z3R0 and his AI agent y4sol"
 description = "y4sol-chats - share AI conversations"
