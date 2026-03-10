@@ -1,0 +1,209 @@
+/*
+ * CollapsibleMessage.module.css
+ *
+ * CSS Module for CollapsibleMessage (and its internal React MessageHeader).
+ * All design values reference tokens from src/styles/tokens.css.
+ */
+
+/* =============================================================================
+   Internal MessageHeader
+   (Mirrors MessageHeader.astro — kept here so the React component is
+   self-contained and does not depend on Astro's rendering pipeline.)
+   ============================================================================= */
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.25rem;
+  margin-bottom: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.hiddenHeader {
+  display: none !important;
+}
+
+.avatar {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+
+.avatarAgent {
+  background-color: var(--bg-tertiary);
+  color: var(--accent);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.avatarHuman {
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.authorName {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  font-family: var(--font-sans);
+}
+
+.authorTimestamp {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: -0.025em;
+}
+
+/* =============================================================================
+   CollapsibleMessage
+   ============================================================================= */
+
+.collapsible {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Collapsibles always use tight bottom margin — they are process information,
+   not primary content. The large spacing between conversation turns comes
+   from the regular message that follows, not from the collapsible itself.
+   (isLastInGroup is still used for the stacked border-radius logic above.) */
+.collapsibleLastInGroup    { margin-bottom: 0.125rem; }
+.collapsibleNotLastInGroup { margin-bottom: 0.125rem; }
+.collapsibleNotFirstInGroup { margin-top: 0; }
+
+.collapsibleWrapper {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border-radius: 2px;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+}
+
+/* Stacked-corner logic: consecutive collapsibles share flush edges,
+   only the outermost items get rounded corners. */
+.collapsibleNotLastInGroup .collapsibleWrapper {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.collapsibleNotFirstInGroup .collapsibleWrapper {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.collapsibleBorder {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.collapsibleToggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  cursor: pointer;
+  border-radius: 2px;
+  background: none;
+  border: none;
+  text-align: left;
+  color: var(--text-muted);
+  transition: opacity 0.2s;
+}
+
+.collapsibleToggleDisabled {
+  cursor: default;
+}
+
+.collapsibleToggle:not(.collapsibleToggleDisabled):hover {
+  background-color: rgba(255, 255, 255, 0.025);
+  opacity: 0.9;
+}
+
+.collapsibleTypeIcon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.collapsibleTypeLabel {
+  font-weight: 400;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: inherit;
+}
+
+.chevronWrapper {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--text-muted);
+}
+
+.chevron {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.collapsibleContent {
+  /* Grid-based height animation: animates the actual intrinsic content height
+     without the jank of large max-height values. The child (.collapsibleBody)
+     needs overflow:hidden so it can shrink below its content height. */
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
+}
+
+.collapsibleContentOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* .collapsibleContentClosed inherits the defaults above (0fr / opacity 0) */
+
+.collapsibleBody {
+  /* overflow:hidden + no padding is required by the grid height animation.
+     Padding on this element counts toward the grid item's minimum size and
+     prevents the row from truly collapsing to 0. Padding lives in the inner
+     wrapper (.collapsibleBodyInner) instead. */
+  overflow: hidden;
+  min-height: 0;
+}
+
+.collapsibleBodyInner {
+  padding: 0.75rem 1rem 0.75rem 3.25rem;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  line-height: 1.625;
+}
+
+/* Prose typography is provided by src/styles/prose.css (imported in CollapsibleMessage.tsx).
+   The .prose class is used directly as a plain class name — not a CSS Module hash. */
