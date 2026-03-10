@@ -1,0 +1,188 @@
+---
+import { getPublicChats, getChatsSortedByDate } from '../lib/chats.js'
+import { getProjectConfig } from '../lib/config.js'
+import Footer from '../components/Footer.astro';
+import MemoryBackground from '../components/MemoryBackground.astro';
+import DecorativeCorners from '../components/DecorativeCorners.astro';
+import '../styles/global.css';
+
+const chats = getChatsSortedByDate(await getPublicChats())
+const config = await getProjectConfig()
+const siteTitle = config.template?.options?.title || 'chats-share'
+const siteSubtitle = config.template?.options?.subtitle || '// openclaw conversation archive'
+const siteDescription = config.template?.options?.description || 'OpenClaw Chats Share - A place for sharing and exploring AI chat conversations.'
+const siteUrl = config.site?.replace(/\/$/, '') ?? ''
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={siteDescription} />
+    <title>{siteSubtitle ? `${siteTitle} | ${siteSubtitle}` : siteTitle}</title>
+    <link rel="canonical" href={Astro.url.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={siteSubtitle ? `${siteTitle} - ${siteSubtitle}` : siteTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:url" content={Astro.url.href} />
+    {siteUrl && <meta property="og:image" content={`${siteUrl}/cover.svg`} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {siteUrl && <meta name="twitter:image" content={`${siteUrl}/cover.svg`} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 5rem 1.5rem;
+      }
+
+      /* Header */
+      .header {
+        margin-bottom: 4rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .title {
+        font-family: var(--font-mono);
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--accent);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+
+      .subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        font-family: var(--font-mono);
+      }
+
+      /* Chats list */
+      .chats-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .chat-item {
+        display: block;
+        padding: 1.5rem 1.25rem;
+        text-decoration: none;
+        color: inherit;
+        border-left: 2px solid transparent;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+
+      .chat-item:hover {
+        background: var(--bg-secondary);
+        border-left-color: var(--accent-dim);
+      }
+
+      .chat-item:hover .chat-topic {
+        color: var(--accent);
+      }
+
+      .chat-topic {
+        font-size: 1.125rem;
+        font-weight: 400;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        transition: color 0.2s ease;
+      }
+
+      .chat-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.75rem;
+        font-family: var(--font-mono);
+        color: var(--text-muted);
+      }
+
+      .chat-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .meta-separator {
+        color: var(--border);
+        font-size: 0.625rem;
+      }
+
+      .platform-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.125rem 0.5rem;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        font-size: 0.625rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-secondary);
+      }
+
+      /* Empty state */
+      .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+        font-size: 0.875rem;
+        border: 1px dashed var(--border);
+      }
+
+    </style>
+  </head>
+  <body>
+    <MemoryBackground />
+    <DecorativeCorners />
+
+    <div class="container">
+      <header class="header">
+        <h1 class="title">{siteTitle}</h1>
+        {siteSubtitle && <p class="subtitle">// {siteSubtitle}</p>}
+      </header>
+
+      {chats.length === 0 ? (
+        <div class="empty-state">
+          <p>// no conversations yet</p>
+        </div>
+      ) : (
+        <div class="chats-list">
+          {chats.map(chat => (
+            <a href={`/chats/${chat.slug}`} class="chat-item">
+              <h2 class="chat-topic">{chat.title}</h2>
+              <div class="chat-meta">
+                {chat.channel && (
+                  <>
+                    <span class="platform-badge">{chat.channel}</span>
+                    <span class="meta-separator">◆</span>
+                  </>
+                )}
+                {chat.model && (
+                  <>
+                    <span class="chat-meta-item">{chat.model}</span>
+                    <span class="meta-separator">◆</span>
+                  </>
+                )}
+                <span class="chat-meta-item">{chat.date}</span>
+                <span class="meta-separator">◆</span>
+                <span class="chat-meta-item">{chat.totalMessages} msgs</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+      <Footer />
+    </div>
+  </body>
+</html>
