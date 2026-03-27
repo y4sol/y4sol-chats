@@ -1,7 +1,7 @@
 # chats-share.toml
 # Configuration for openclaw-chats-share-web.
 
-site = "https://y4sol.netlify.app"
+site = "https://y4sol-chats.pages.dev"
 base = ""
 
 [template.options]
