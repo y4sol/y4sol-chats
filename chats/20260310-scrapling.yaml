@@ -1,0 +1,551 @@
+title: Scrapling 框架分析
+date: '2026-03-10'
+sessionId: xxxxxx
+visibility: public
+defaultShowProcess: false
+description: AI 深度分析 Web 爬虫框架 Scrapling
+channel: discord
+participants:
+  Z3R0:
+    role: human
+  y4sol:
+    role: agent
+    model: MiniMax-M2.5
+timeline:
+- type: session
+  timestamp: 2026-03-10 14:18:16.838000+00:00
+  cwd: '~'
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:18:27.112000+00:00
+  model: MiniMax-M2.5
+  content: Hey! 👾 今晚想搞点啥？
+- type: message
+  role: human
+  speaker: Z3R0
+  timestamp: 2026-03-10 14:18:32.978000+00:00
+  content: https://github.com/D4Vinci/Scrapling深度分析
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:18:48.529000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: thinking
+    content: The user wants me to deeply analyze the Scrapling repository on GitHub.
+      Let me fetch information about this repository.
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:18:48.529000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: tool_call
+    id: call_function_4nhz3g3pfaep_1
+    name: exec
+    arguments:
+      command: curl -sL "https://api.github.com/repos/D4Vinci/Scrapling" | jq -r '.description,.stargazers_count,.forks_count,.language,.topics,.open_issues_count'
+    result:
+      content: "\U0001F577️ An adaptive Web Scraping framework that handles everything\
+        \ from a single request to a full-scale crawl!\n27901\n2071\nPython\n[\n \
+        \ \"ai\",\n  \"ai-scraping\",\n  \"automation\",\n  \"crawler\",\n  \"crawling\"\
+        ,\n  \"crawling-python\",\n  \"data\",\n  \"data-extraction\",\n  \"mcp\"\
+        ,\n  \"mcp-server\",\n  \"playwright\",\n  \"python\",\n  \"scraping\",\n\
+        \  \"selectors\",\n  \"stealth\",\n  \"web-scraper\",\n  \"web-scraping\"\
+        ,\n  \"web-scraping-python\",\n  \"webscraping\",\n  \"xpath\"\n]\n2"
+      isError: false
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:18:57.166000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: thinking
+    content: Let me get more details about the repository structure and key files.
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:18:57.166000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: tool_call
+    id: call_function_yjb9ouhb46fs_1
+    name: exec
+    arguments:
+      command: curl -sL "https://api.github.com/repos/D4Vinci/Scrapling/contents"
+        | jq -r '.[] | .name,.type' | paste - -
+    result:
+      content: ".bandit.yml\tfile\n.dockerignore\tfile\n.github\tdir\n.gitignore\t\
+        file\n.pre-commit-config.yaml\tfile\n.readthedocs.yaml\tfile\nCODE_OF_CONDUCT.md\t\
+        file\nCONTRIBUTING.md\tfile\nDockerfile\tfile\nLICENSE\tfile\nMANIFEST.in\t\
+        file\nREADME.md\tfile\nROADMAP.md\tfile\nagent-skill\tdir\nbenchmarks.py\t\
+        file\ncleanup.py\tfile\ndocs\tdir\nimages\tdir\npyproject.toml\tfile\npytest.ini\t\
+        file\nruff.toml\tfile\nscrapling\tdir\nserver.json\tfile\nsetup.cfg\tfile\n\
+        tests\tdir\ntox.ini\tfile\nzensical.toml\tfile"
+      isError: false
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:19:20.585000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: thinking
+    content: This looks like a comprehensive web scraping framework. Let me get the
+      README to understand the core features and architecture.
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:19:20.585000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: tool_call
+    id: call_function_hbdz0sic3ev8_1
+    name: exec
+    arguments:
+      command: curl -sL "https://raw.githubusercontent.com/D4Vinci/Scrapling/main/README.md"
+        | head -200
+    result:
+      content: "<!-- mcp-name: io.github.D4Vinci/Scrapling -->\n\n<h1 align=\"center\"\
+        >\n    <a href=\"https://scrapling.readthedocs.io\">\n        <picture>\n\
+        \          <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/docs/assets/cover_dark.svg?sanitize=true\"\
+        >\n          <img alt=\"Scrapling Poster\" src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/docs/assets/cover_light.svg?sanitize=true\"\
+        >\n        </picture>\n    </a>\n    <br>\n    <small>Effortless Web Scraping\
+        \ for the Modern Web</small>\n</h1>\n\n<p align=\"center\">\n    <a href=\"\
+        https://trendshift.io/repositories/14244\" target=\"_blank\"><img src=\"https://trendshift.io/api/badge/repositories/14244\"\
+        \ alt=\"D4Vinci%2FScrapling | Trendshift\" style=\"width: 250px; height: 55px;\"\
+        \ width=\"250\" height=\"55\"/></a>\n    <br/>\n    <a href=\"https://github.com/D4Vinci/Scrapling/blob/main/docs/README_AR.md\"\
+        >العربيه</a> | <a href=\"https://github.com/D4Vinci/Scrapling/blob/main/docs/README_ES.md\"\
+        >Español</a> | <a href=\"https://github.com/D4Vinci/Scrapling/blob/main/docs/README_FR.md\"\
+        >Français</a> | <a href=\"https://github.com/D4Vinci/Scrapling/blob/main/docs/README_DE.md\"\
+        >Deutsch</a> | <a href=\"https://github.com/D4Vinci/Scrapling/blob/main/docs/README_CN.md\"\
+        >简体中文</a> | <a href=\"https://github.com/D4Vinci/Scrapling/blob/main/docs/README_JP.md\"\
+        >日本語</a> |  <a href=\"https://github.com/D4Vinci/Scrapling/blob/main/docs/README_RU.md\"\
+        >Русский</a>\n    <br/>\n    <a href=\"https://github.com/D4Vinci/Scrapling/actions/workflows/tests.yml\"\
+        \ alt=\"Tests\">\n        <img alt=\"Tests\" src=\"https://github.com/D4Vinci/Scrapling/actions/workflows/tests.yml/badge.svg\"\
+        ></a>\n    <a href=\"https://badge.fury.io/py/Scrapling\" alt=\"PyPI version\"\
+        >\n        <img alt=\"PyPI version\" src=\"https://badge.fury.io/py/Scrapling.svg\"\
+        ></a>\n    <a href=\"https://pepy.tech/project/scrapling\" alt=\"PyPI Downloads\"\
+        >\n        <img alt=\"PyPI Downloads\" src=\"https://static.pepy.tech/personalized-badge/scrapling?period=total&units=INTERNATIONAL_SYSTEM&left_color=GREY&right_color=GREEN&left_text=Downloads\"\
+        ></a>\n    <a href=\"https://github.com/D4Vinci/Scrapling/tree/main/agent-skill\"\
+        \ alt=\"AI Agent Skill directory\">\n        <img alt=\"Static Badge\" src=\"\
+        https://img.shields.io/badge/Skill-black?style=flat&label=Agent&link=https%3A%2F%2Fgithub.com%2FD4Vinci%2FScrapling%2Ftree%2Fmain%2Fagent-skill\"\
+        ></a>\n    <a href=\"https://clawhub.ai/D4Vinci/scrapling-official\" alt=\"\
+        OpenClaw Skill\">\n        <img alt=\"OpenClaw Skill\" src=\"https://img.shields.io/badge/Clawhub-darkred?style=flat&label=OpenClaw&link=https%3A%2F%2Fclawhub.ai%2FD4Vinci%2Fscrapling-official\"\
+        ></a>\n    <br/>\n    <a href=\"https://discord.gg/EMgGbDceNQ\" alt=\"Discord\"\
+        \ target=\"_blank\">\n      <img alt=\"Discord\" src=\"https://img.shields.io/discord/1360786381042880532?style=social&logo=discord&link=https%3A%2F%2Fdiscord.gg%2FEMgGbDceNQ\"\
+        >\n    </a>\n    <a href=\"https://x.com/Scrapling_dev\" alt=\"X (formerly\
+        \ Twitter)\">\n      <img alt=\"X (formerly Twitter) Follow\" src=\"https://img.shields.io/twitter/follow/Scrapling_dev?style=social&logo=x&link=https%3A%2F%2Fx.com%2FScrapling_dev\"\
+        >\n    </a>\n    <br/>\n    <a href=\"https://pypi.org/project/scrapling/\"\
+        \ alt=\"Supported Python versions\">\n        <img alt=\"Supported Python\
+        \ versions\" src=\"https://img.shields.io/pypi/pyversions/scrapling.svg\"\
+        ></a>\n</p>\n\n<p align=\"center\">\n    <a href=\"https://scrapling.readthedocs.io/en/latest/parsing/selection/\"\
+        ><strong>Selection methods</strong></a>\n    &middot;\n    <a href=\"https://scrapling.readthedocs.io/en/latest/fetching/choosing/\"\
+        ><strong>Fetchers</strong></a>\n    &middot;\n    <a href=\"https://scrapling.readthedocs.io/en/latest/spiders/architecture.html\"\
+        ><strong>Spiders</strong></a>\n    &middot;\n    <a href=\"https://scrapling.readthedocs.io/en/latest/spiders/proxy-blocking.html\"\
+        ><strong>Proxy Rotation</strong></a>\n    &middot;\n    <a href=\"https://scrapling.readthedocs.io/en/latest/cli/overview/\"\
+        ><strong>CLI</strong></a>\n    &middot;\n    <a href=\"https://scrapling.readthedocs.io/en/latest/ai/mcp-server/\"\
+        ><strong>MCP</strong></a>\n</p>\n\nScrapling is an adaptive Web Scraping framework\
+        \ that handles everything from a single request to a full-scale crawl.\n\n\
+        Its parser learns from website changes and automatically relocates your elements\
+        \ when pages update. Its fetchers bypass anti-bot systems like Cloudflare\
+        \ Turnstile out of the box. And its spider framework lets you scale up to\
+        \ concurrent, multi-session crawls with pause/resume and automatic proxy rotation\
+        \ — all in a few lines of Python. One library, zero compromises.\n\nBlazing\
+        \ fast crawls with real-time stats and streaming. Built by Web Scrapers for\
+        \ Web Scrapers and regular users, there's something for everyone.\n\n```python\n\
+        from scrapling.fetchers import Fetcher, AsyncFetcher, StealthyFetcher, DynamicFetcher\n\
+        StealthyFetcher.adaptive = True\np = StealthyFetcher.fetch('https://example.com',\
+        \ headless=True, network_idle=True)  # Fetch website under the radar!\nproducts\
+        \ = p.css('.product', auto_save=True)                                    \
+        \    # Scrape data that survives website design changes!\nproducts = p.css('.product',\
+        \ adaptive=True)                                         # Later, if the website\
+        \ structure changes, pass `adaptive=True` to find them!\n```\nOr scale up\
+        \ to full crawls\n```python\nfrom scrapling.spiders import Spider, Response\n\
+        \nclass MySpider(Spider):\n  name = \"demo\"\n  start_urls = [\"https://example.com/\"\
+        ]\n\n  async def parse(self, response: Response):\n      for item in response.css('.product'):\n\
+        \          yield {\"title\": item.css('h2::text').get()}\n\nMySpider().start()\n\
+        ```\n\n<p align=\"center\">\n    <a href=\"https://dataimpulse.com/?utm_source=scrapling&utm_medium=banner&utm_campaign=scrapling\"\
+        \ target=\"_blank\" style=\"display:flex; justify-content:center; padding:4px\
+        \ 0;\">\n        <img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/DataImpulse.png\"\
+        \ alt=\"At DataImpulse, we specialize in developing custom proxy services\
+        \ for your business. Make requests from anywhere, collect data, and enjoy\
+        \ fast connections with our premium proxies.\" style=\"max-height:60px;\"\
+        >\n    </a>\n</p>\n\n# Platinum Sponsors\n<table>\n  <tr>\n    <td width=\"\
+        200\">\n      <a href=\"https://hypersolutions.co/?utm_source=github&utm_medium=readme&utm_campaign=scrapling\"\
+        \ target=\"_blank\" title=\"Bot Protection Bypass API for Akamai, DataDome,\
+        \ Incapsula & Kasada\">\n        <img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/HyperSolutions.png\"\
+        >\n        <br />\n      </a>\n    </td>\n    <td> Scrapling handles Cloudflare\
+        \ Turnstile. For enterprise-grade protection, <a href=\"https://hypersolutions.co?utm_source=github&utm_medium=readme&utm_campaign=scrapling\"\
+        >\n        <b>Hyper Solutions</b>\n      </a> provides API endpoints that\
+        \ generate valid antibot tokens for <b>Akamai</b>, <b>DataDome</b>, <b>Kasada</b>,\
+        \ and <b>Incapsula</b>. Simple API calls, no browser automation required.\
+        \ </td>\n  </tr>\n  <tr>\n    <td width=\"200\">\n      <a href=\"https://birdproxies.com/t/scrapling\"\
+        \ target=\"_blank\" title=\"At Bird Proxies, we eliminate your pains such\
+        \ as banned IPs, geo restriction, and high costs so you can focus on your\
+        \ work.\">\n        <img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/BirdProxies.jpg\"\
+        >\n        <br />\n      </a>\n    </td>\n    <td>Hey, we built <a href=\"\
+        https://birdproxies.com/t/scrapling\">\n        <b>BirdProxies</b>\n     \
+        \ </a> because proxies shouldn't be complicated or overpriced. Fast residential\
+        \ and ISP proxies in 195+ locations, fair pricing, and real support. <br />\n\
+        \      <b>Try our FlappyBird game on the landing page for free data!</b>\n\
+        \    </td>\n  </tr>\n  <tr>\n    <td width=\"200\">\n      <a href=\"https://evomi.com?utm_source=github&utm_medium=banner&utm_campaign=d4vinci-scrapling\"\
+        \ target=\"_blank\" title=\"Evomi is your Swiss Quality Proxy Provider, starting\
+        \ at $0.49/GB\">\n        <img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/evomi.png\"\
+        >\n        <br />\n      </a>\n    </td>\n    <td>\n      <a href=\"https://evomi.com?utm_source=github&utm_medium=banner&utm_campaign=d4vinci-scrapling\"\
+        >\n        <b>Evomi</b>\n      </a>: residential proxies from $0.49/GB. Scraping\
+        \ browser with fully spoofed Chromium, residential IPs, auto CAPTCHA solving,\
+        \ and anti-bot bypass. </br>\n      <b>Scraper API for hassle-free results.\
+        \ MCP and N8N integrations are available.</b>\n    </td>\n  </tr>\n  <tr>\n\
+        \    <td width=\"200\">\n      <a href=\"https://tikhub.io/?ref=KarimShoair\"\
+        \ target=\"_blank\" title=\"Unlock the Power of Social Media Data & AI\">\n\
+        \        <img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/TikHub.jpg\"\
+        >\n        <br />\n      </a>\n    </td>\n    <td>\n      <a href=\"https://tikhub.io/?ref=KarimShoair\"\
+        \ target=\"_blank\">TikHub.io</a> provides 900+ stable APIs across 16+ platforms\
+        \ including TikTok, X, YouTube & Instagram, with 40M+ datasets. <br /> Also\
+        \ offers <a href=\"https://ai.tikhub.io/?ref=KarimShoair\" target=\"_blank\"\
+        >DISCOUNTED AI models</a> — Claude, GPT, GEMINI & more up to 71% off.\n  \
+        \  </td>\n  </tr>\n</table>\n\n<i><sub>Do you want to show your ad here? Click\
+        \ [here](https://github.com/sponsors/D4Vinci/sponsorships?tier_id=586646)</sub></i>\n\
+        # Sponsors \n\n<!-- sponsors -->\n\n<a href=\"https://serpapi.com/?utm_source=scrapling\"\
+        \ target=\"_blank\" title=\"Scrape Google and other search engines with SerpApi\"\
+        ><img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/SerpApi.png\"\
+        ></a>\n<a href=\"https://visit.decodo.com/Dy6W0b\" target=\"_blank\" title=\"\
+        Try the Most Efficient Residential Proxies for Free\"><img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/decodo.png\"\
+        ></a>\n<a href=\"https://petrosky.io/d4vinci\" target=\"_blank\" title=\"\
+        PetroSky delivers cutting-edge VPS hosting.\"><img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/petrosky.png\"\
+        ></a>\n<a href=\"https://hasdata.com/?utm_source=github&utm_medium=banner&utm_campaign=D4Vinci\"\
+        \ target=\"_blank\" title=\"The web scraping service that actually beats anti-bot\
+        \ systems!\"><img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/hasdata.png\"\
+        ></a>\n<a href=\"https://proxyempire.io/?ref=scrapling&utm_source=scrapling\"\
+        \ target=\"_blank\" title=\"Collect The Data Your Project Needs with the Best\
+        \ Residential Proxies\"><img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/ProxyEmpire.png\"\
+        ></a>\n\n\n<a href=\"https://www.swiftproxy.net/\" target=\"_blank\" title=\"\
+        Unlock Reliable Proxy Services with Swiftproxy!\"><img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/swiftproxy.png\"\
+        ></a>\n<a href=\"https://www.rapidproxy.io/?ref=d4v\" target=\"_blank\" title=\"\
+        Affordable Access to the Proxy World – bypass CAPTCHAs blocks, and avoid additional\
+        \ costs.\"><img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/rapidproxy.jpg\"\
+        ></a>\n<a href=\"https://browser.cash/?utm_source=D4Vinci&utm_medium=referral\"\
+        \ target=\"_blank\" title=\"Browser Automation & AI Browser Agent Platform\"\
+        ><img src=\"https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/browserCash.png\"\
+        ></a>\n\n<!-- /sponsors -->\n\n<i><sub>Do you want to show your ad here? Click\
+        \ [here](https://github.com/sponsors/D4Vinci) and choose the tier that suites\
+        \ you!</sub></i>\n\n---\n\n## Key Features\n\n### Spiders — A Full Crawling\
+        \ Framework\n- \U0001F577️ **Scrapy-like Spider API**: Define spiders with\
+        \ `start_urls`, async `parse` callbacks, and `Request`/`Response` objects.\n\
+        - ⚡ **Concurrent Crawling**: Configurable concurrency limits, per-domain throttling,\
+        \ and download delays.\n- \U0001F504 **Multi-Session Support**: Unified interface\
+        \ for HTTP requests, and stealthy headless browsers in a single spider — route\
+        \ requests to different sessions by ID.\n- \U0001F4BE **Pause & Resume**:\
+        \ Checkpoint-based crawl persistence. Press Ctrl+C for a graceful shutdown;\
+        \ restart to resume from where you left off.\n- \U0001F4E1 **Streaming Mode**:\
+        \ Stream scraped items as they arrive via `async for item in spider.stream()`\
+        \ with real-time stats — ideal for UI, pipelines, and long-running crawls.\n\
+        - \U0001F6E1️ **Blocked Request Detection**: Automatic detection and retry\
+        \ of blocked requests with customizable logic.\n- \U0001F4E6 **Built-in Export**:\
+        \ Export results through hooks and your own pipeline or the built-in JSON/JSONL\
+        \ with `result.items.to_json()` / `result.items.to_jsonl()` respectively.\n\
+        \n### Advanced Websites Fetching with Session Support\n- **HTTP Requests**:\
+        \ Fast and stealthy HTTP requests with the `Fetcher` class. Can impersonate\
+        \ browsers' TLS fingerprint, headers, and use HTTP/3.\n- **Dynamic Loading**:\
+        \ Fetch dynamic websites with full browser automation through the `DynamicFetcher`\
+        \ class supporting Playwright's Chromium and Google's Chrome.\n- **Anti-bot\
+        \ Bypass**: Advanced stealth capabilities with `StealthyFetcher` and fingerprint\
+        \ spoofing. Can easily bypass all types of Cloudflare's Turnstile/Interstitial\
+        \ with automation.\n- **Session Management**: Persistent session support with\
+        \ `FetcherSession`, `StealthySession`, and `DynamicSession` classes for cookie\
+        \ and state management across requests.\n- **Proxy Rotation**: Built-in `ProxyRotator`\
+        \ with cyclic or custom rotation strategies across all session types, plus\
+        \ per-request proxy overrides.\n- **Domain Blocking**: Block requests to specific\
+        \ domains (and their subdomains) in browser-based fetchers.\n- **Async Support**:\
+        \ Complete async support across all fetchers and dedicated async session classes.\n\
+        \n### Adaptive Scraping & AI Integration\n- \U0001F504 **Smart Element Tracking**:\
+        \ Relocate elements after website changes using intelligent similarity algorithms.\n\
+        - \U0001F3AF **Smart Flexible Selection**: CSS selectors, XPath selectors,\
+        \ filter-based search, text search, regex search, and more.\n- \U0001F50D\
+        \ **Find Similar Elements**: Automatically locate elements similar to found\
+        \ elements.\n- \U0001F916 **MCP Server to be used with AI**: Built-in MCP\
+        \ server for AI-assisted Web Scraping and data extraction. The MCP server\
+        \ features powerful, custom capabilities that leverage Scrapling to extract\
+        \ targeted content before passing it to the AI (Claude/Cursor/etc), thereby\
+        \ speeding up operations and reducing costs by minimizing token usage. ([demo\
+        \ video](https://www.youtube.com/watch?v=qyFk3ZNwOxE))\n\n### High-Performance\
+        \ & battle-tested Architecture\n- \U0001F680 **Lightning Fast**: Optimized\
+        \ performance outperforming most Python scraping libraries.\n- \U0001F50B\
+        \ **Memory Efficient**: Optimized data structures and lazy loading for a minimal\
+        \ memory footprint.\n- ⚡ **Fast JSON Serialization**: 10x faster than the\
+        \ standard library.\n- \U0001F3D7️ **Battle tested**: Not only does Scrapling\
+        \ have 92% test coverage and full type hints coverage, but it has been used\
+        \ daily by hundreds of Web Scrapers over the past year.\n\n### Developer/Web\
+        \ Scraper Friendly Experience\n- \U0001F3AF **Interactive Web Scraping Shell**:\
+        \ Optional built-in IPython shell with Scrapling integration, shortcuts, and\
+        \ new tools to speed up Web Scraping scripts development, like converting\
+        \ curl requests to Scrapling requests and viewing requests results in your\
+        \ browser.\n- \U0001F680 **Use it directly from the Terminal**: Optionally,\
+        \ you can use Scrapling to scrape a URL without writing a single line of code!\n\
+        - \U0001F6E0️ **Rich Navigation API**: Advanced DOM traversal with parent,\
+        \ sibling, and child navigation methods.\n- \U0001F9EC **Enhanced Text Processing**:\
+        \ Built-in regex, cleaning methods, and optimized string operations."
+      isError: false
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:19:34.176000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: thinking
+    content: This is a very comprehensive web scraping framework. Let me also check
+      the main source code structure to understand the architecture better.
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:19:34.176000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: tool_call
+    id: call_function_xvu6uq8fttih_1
+    name: exec
+    arguments:
+      command: curl -sL "https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling"
+        | jq -r '.[] | .name'
+    result:
+      content: '__init__.py
+
+        cli.py
+
+        core
+
+        engines
+
+        fetchers
+
+        parser.py
+
+        py.typed
+
+        spiders'
+      isError: false
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:19:49.100000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: thinking
+    content: Let me get more details about the core modules.
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:19:49.100000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: tool_call
+    id: call_function_jdmqbn0hn6qd_1
+    name: exec
+    arguments:
+      command: curl -sL "https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/fetchers"
+        | jq -r '.[] | .name' && echo "---" && curl -sL "https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/spiders"
+        | jq -r '.[] | .name'
+    result:
+      content: Command still running (session ember-lobster, pid 579553). Use process
+        (list/poll/log/write/kill/clear/remove) for follow-up.
+      isError: false
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:20:01.589000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: thinking
+    content: Let me wait for the result or try again.
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:20:01.589000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: tool_call
+    id: call_function_41naxnmcd1pq_1
+    name: process
+    arguments:
+      action: poll
+      sessionId: ember-lobster
+      timeout: 5000
+    result:
+      content: '---
+
+
+
+        Process exited with code 0.'
+      isError: false
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:20:04.269000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: thinking
+    content: Let me try again to get the module structure.
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:20:04.269000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: tool_call
+    id: call_function_0rlfx1px8np0_1
+    name: exec
+    arguments:
+      command: curl -sL "https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/fetchers"
+        2>/dev/null | jq -r '.[] .name' && echo "---spiders---" && curl -sL "https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/spiders"
+        2>/dev/null | jq -r '.[] .name'
+    result:
+      content: '__init__.py
+
+        chrome.py
+
+        requests.py
+
+        stealth_chrome.py
+
+        ---spiders---
+
+        __init__.py
+
+        checkpoint.py
+
+        engine.py
+
+        request.py
+
+        result.py
+
+        scheduler.py
+
+        session.py
+
+        spider.py'
+      isError: false
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:20:09.672000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: thinking
+    content: Now I have enough information to provide a deep analysis. Let me also
+      check if there's an MCP server component.
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:20:09.672000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: tool_call
+    id: call_function_m7n353zg1plm_1
+    name: exec
+    arguments:
+      command: curl -sL "https://api.github.com/repos/D4Vinci/Scrapling/contents/server.json"
+        | jq -r '.content' | base64 -d 2>/dev/null | head -50
+    result:
+      content: "{\n  \"$schema\": \"https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json\"\
+        ,\n  \"name\": \"io.github.D4Vinci/Scrapling\",\n  \"title\": \"Scrapling\
+        \ MCP Server\",\n  \"description\": \"Web scraping with stealth HTTP, real\
+        \ browsers, and Cloudflare bypass. CSS selectors supported.\",\n  \"websiteUrl\"\
+        : \"https://scrapling.readthedocs.io/en/latest/ai/mcp-server.html\",\n  \"\
+        repository\": {\n    \"url\": \"https://github.com/D4Vinci/Scrapling\",\n\
+        \    \"source\": \"github\"\n  },\n  \"icons\": [\n    {\n      \"src\": \"\
+        https://raw.githubusercontent.com/D4Vinci/Scrapling/main/docs/assets/logo.png\"\
+        ,\n      \"mimeType\": \"image/png\"\n    }\n  ],\n  \"version\": \"0.4.2\"\
+        ,\n  \"packages\": [\n    {\n      \"registryType\": \"pypi\",\n      \"identifier\"\
+        : \"scrapling\",\n      \"version\": \"0.4.2\",\n      \"runtimeHint\": \"\
+        uvx\",\n      \"packageArguments\": [\n        {\n          \"type\": \"positional\"\
+        ,\n          \"valueHint\": \"mcp\",\n          \"isFixed\": true\n      \
+        \  }\n      ],\n      \"transport\": {\n        \"type\": \"stdio\"\n    \
+        \  }\n    },\n    {\n      \"registryType\": \"oci\",\n      \"identifier\"\
+        : \"ghcr.io/d4vinci/scrapling\",\n      \"packageArguments\": [\n        {\n\
+        \          \"type\": \"positional\",\n          \"valueHint\": \"mcp\",\n\
+        \          \"isFixed\": true\n        }\n      ],\n      \"transport\": {\n\
+        \        \"type\": \"stdio\"\n      }\n    }\n  ]\n}"
+      isError: false
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:20:52.969000+00:00
+  model: MiniMax-M2.5
+  process:
+  - type: thinking
+    content: Now I have a comprehensive understanding of Scrapling. Let me provide
+      a detailed analysis following the required output structure.
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:20:52.969000+00:00
+  model: MiniMax-M2.5
+  content: "# \U0001F577️ Scrapling 深度分析\n\n## 1. 核心定位\n\n**自适应 Web Scraping 框架**\
+    \ — 从单次请求到全规模爬取一体化解决方案。\n\n- **类型**: 企业级爬虫框架\n- **特点**: 智能页面变化适应 + 反爬虫绕过 + 完整爬虫架构\n\
+    - **⭐ 评分**: ⭐⭐⭐⭐⭐ (27.9k Stars, 2k+ Forks)\n\n---\n\n## 2. 架构 (文本流程图)\n\n```\n\
+    用户代码\n    ↓\n┌─────────────────────────────────────────────────────────┐\n│  \
+    \                  Scrapling 框架                        │\n├─────────────────────────────────────────────────────────┤\n\
+    │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │\n│  │   Fetcher   │\
+    \  │   Spider    │  │    MCP      │    │\n│  │  (HTTP)     │  │  (爬虫)      │ \
+    \ │  Server     │    │\n│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘ \
+    \   │\n│         │                │                │             │\n│  ┌──────┴──────┐\
+    \  ┌──────┴──────┐         │             │\n│  │ Stealthy    │  │  Scheduler \
+    \ │         │             │\n│  │ Dynamic     │  │  Engine     │         │   \
+    \          │\n│  └──────┬──────┘  └──────┬──────┘         │             │\n│ \
+    \        │                │                │             │\n│  ┌──────┴────────────────┴────────────────┴──────┐\
+    \      │\n│  │              Parser (自适应解析器)               │      │\n│  │    •\
+    \ CSS/XPath 选择器                          │      │\n│  │    • 智能元素追踪 (页面变化适应) \
+    \                 │      │\n│  │    • 相似元素查找                               │ \
+    \     │\n│  └───────────────────────────────────────────────┘      │\n└─────────────────────────────────────────────────────────┘\n\
+    \         ↓              ↓              ↓\n   HTTP/3 请求    Playwright     AI Agent\n\
+    \   TLS指纹伪装   浏览器自动化    (Claude/Cursor)\n```\n\n---\n\n## 3. 技术栈\n\n| 模块 | 技术\
+    \ |\n|------|------|\n| **HTTP 请求** | `requests` + TLS 指纹伪装 + HTTP/3 |\n| **浏览器**\
+    \ | Playwright (Chromium) + Chrome |\n| **反爬绕过** | Cloudflare Turnstile/Interstitial\
+    \ |\n| **异步** | `asyncio` |\n| **代理轮换** | 内置 `ProxyRotator` |\n| **AI 集成** | MCP\
+    \ Server (Claude/Cursor) |\n| **爬虫架构** | 类 Scrapy 设计 |\n| **序列化** | 自研 Fast JSON\
+    \ (比标准库快 10x) |\n\n---\n\n## 4. 使用方式\n\n### 快速开始 (单次请求)\n```python\nfrom scrapling.fetchers\
+    \ import StealthyFetcher\n\n# 绕过 Cloudflare + 自动元素追踪\nStealthyFetcher.adaptive\
+    \ = True\np = StealthyFetcher.fetch('https://example.com', headless=True, network_idle=True)\n\
+    \n# 自适应选择器 - 网站改版也能找到\nproducts = p.css('.product', adaptive=True)\n```\n\n###\
+    \ 完整爬虫\n```python\nfrom scrapling.spiders import Spider, Response\n\nclass MySpider(Spider):\n\
+    \    name = \"demo\"\n    start_urls = [\"https://example.com/\"]\n    \n    async\
+    \ def parse(self, response: Response):\n        for item in response.css('.product'):\n\
+    \            yield {\"title\": item.css('h2::text').get()}\n\n# 启动爬虫 (支持流式输出、暂停恢复)\n\
+    MySpider().start()\n```\n\n### CLI 用法\n```bash\n# 无需写代码，直接命令行爬取\nscrapling https://example.com\
+    \ -s \".title::text\"\n```\n\n### MCP Server (AI Agent 用)\n```bash\n# 启动 MCP Server\n\
+    uvx scrapling mcp\n```\n\n---\n\n## 5. 核心机制\n\n### \U0001F504 自适应解析 (Adaptive\
+    \ Parsing)\n- **智能元素追踪**: 记录元素特征 (文本、结构、位置)\n- **页面变化适应**: 网站改版后自动重新定位元素\n- **相似元素查找**:\
+    \ 找到的元素可用于发现更多相似元素\n\n### \U0001F6E1️ 反爬虫绕过\n- **TLS 指纹**: 模拟真实浏览器 TLS 握手\n- **Header\
+    \ 伪装**: 自动生成真实浏览器 Header\n- **Cloudflare Turnstile**: 内置绕过 (无需手动解验证码)\n- **Playwright\
+    \ 浏览器**: 完全自动化浏览器指纹\n\n### \U0001F577️ 爬虫框架\n- **并发控制**: 可配置并发数、域名限速、下载延迟\n- **多会话**:\
+    \ 统一接口管理 HTTP + 浏览器会话\n- **暂停/恢复**: Checkpoint 机制，Ctrl+C 优雅关机\n- **流式输出**: `async\
+    \ for item in spider.stream()` 实时推送\n\n### \U0001F500 代理轮换\n- 内置 `ProxyRotator`\
+    \ \n- 支持循环/自定义策略\n- 支持单请求代理覆盖\n\n---\n\n## 6. 外部集成\n\n| 集成 | 用途 |\n|------|------|\n\
+    | **MCP Server** | AI Agent (Claude/Cursor) 调用 |\n| **Playwright** | 动态页面渲染 |\n\
+    | **代理服务商** | DataImpulse, BirdProxies, Evomi, Decodo |\n| **反爬 API** | Hyper\
+    \ Solutions (Akamai/DataDome/Kasada) |\n| **CLI** | 终端直接爬取 |\n| **IPython Shell**\
+    \ | 交互式调试 + curl 转代码 |\n\n---\n\n## 7. 优缺点对比\n\n| 维度 | 优点 | 缺点 |\n|------|------|------|\n\
+    | **易用性** | API 简洁，文档丰富 | 功能太多，学习曲线略陡 |\n| **反爬能力** | 开箱即用 Cloudflare 绕过 | 复杂反爬仍需企业级方案\
+    \ |\n| **性能** | Fast JSON 快 10x，内存优化 | 大量并发仍需优化 |\n| **稳定性** | 92% 测试覆盖，类型提示完整\
+    \ | 依赖 Playwright，体积较大 |\n| **扩展性** | MCP + Spider Hooks 丰富 | 插件生态较弱 |\n| **社区**\
+    \ | 27k Stars，活跃开发 | 中文资料较少 |\n\n---\n\n## 8. 对比同类工具\n\n| 工具 | 类型 | 反爬 | 难度 |\
+    \ 适合场景 |\n|------|------|------|------|----------|\n| **Scrapling** | 框架 | ⭐⭐⭐⭐\
+    \ | 中 | 企业级爬虫 + AI 集成 |\n| **Playwright** | 工具库 | ⭐⭐ | 低 | 简单动态页面 |\n| **Scrapy**\
+    \ | 框架 | ⭐⭐ | 高 | 大型爬虫项目 |\n| **Selenium** | 工具库 | ⭐ | 低 | 简单自动化测试 |\n| **Puppeteer**\
+    \ | 工具库 | ⭐⭐ | 中 | Node.js 项目 |\n\n---\n\n## 总结\n\nScrapling 是一个 **功能完备的企业级爬虫框架**，核心亮点：\n\
+    \n1. **自适应解析** — 解决网站改版痛点\n2. **开箱即用的反爬** — Cloudflare Turnstile 绕过\n3. **完整爬虫架构**\
+    \ — 暂停恢复、流式输出、代理轮换\n4. **AI 集成** — MCP Server 支持 Claude/Cursor\n\n适合需要 **稳定爬取\
+    \ + 长期维护** 的项目。复杂度高于 Playwright，但长期维护成本更低。"
+- type: message
+  role: human
+  speaker: Z3R0
+  timestamp: 2026-03-10 14:39:05.960000+00:00
+  content: 记到笔记
+- type: message
+  role: agent
+  speaker: y4sol
+  timestamp: 2026-03-10 14:40:05.968000+00:00
+  model: MiniMax-M2.5
+  content: ✅ 已保存到 `notes/research/2026-03-10-Scrapling分析.md`

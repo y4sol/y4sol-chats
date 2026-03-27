@@ -1,0 +1,238 @@
+---
+import Footer from '../components/Footer.astro';
+import MemoryBackground from '../components/MemoryBackground.astro';
+import DecorativeCorners from '../components/DecorativeCorners.astro';
+import { getProjectConfig } from '../lib/config.js';
+import '../styles/global.css';
+
+interface Props {
+  title: string
+  description?: string
+  channel?: string
+  model?: string
+  date?: string
+  messageCount?: number
+  regularMessageCount?: number
+  showProcessByDefault?: boolean
+  ogImageUrl?: string
+}
+
+const { title, description, channel, model, date, messageCount, regularMessageCount, showProcessByDefault = false, ogImageUrl } = Astro.props;
+const config = await getProjectConfig();
+const siteTitle = config.template?.options?.title || 'chats-share';
+const siteSubtitle = config.template?.options?.subtitle || '';
+const siteSuffix = siteSubtitle ? `${siteTitle} - ${siteSubtitle}` : siteTitle;
+const pageDescription = description || config.template?.options?.description || undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {pageDescription && <meta name="description" content={pageDescription} />}
+    <title>{title} | {siteSuffix}</title>
+    <link rel="canonical" href={Astro.url.href} />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={`${title} | ${siteSuffix}`} />
+    {pageDescription && <meta property="og:description" content={pageDescription} />}
+    <meta property="og:url" content={Astro.url.href} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+      /* Sticky nav */
+      .page-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg-primary);
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s ease;
+      }
+
+      .page-nav.scrolled {
+        border-bottom-color: var(--border);
+      }
+
+      .page-nav-inner {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.625rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.8;
+        transition: color 0.15s ease, opacity 0.15s ease;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .back-link:hover {
+        color: var(--text-primary);
+        opacity: 1;
+      }
+
+      .nav-title {
+        flex: 1;
+        min-width: 0;
+        font-family: var(--font-serif);
+        font-size: 0.9rem;
+        color: var(--text-primary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .nav-title.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Layout */
+      .layout-container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem 4rem;
+      }
+
+      /* Header */
+      .layout-header-wrapper {
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .layout-header-title {
+        font-size: 1.75rem;
+        font-weight: 400;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        line-height: 1.4;
+      }
+
+      .layout-meta {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .layout-meta-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+
+      .meta-label {
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.625rem;
+      }
+
+      .layout-meta-separator {
+        color: var(--border);
+        font-size: 0.5rem;
+      }
+    </style>
+  </head>
+  <body class:list={[showProcessByDefault && 'show-process']}>
+    <MemoryBackground />
+    <DecorativeCorners />
+
+    <nav class="page-nav" id="page-nav">
+      <div class="page-nav-inner">
+        <a href="/" class="back-link">
+          <span aria-hidden="true">←</span> archive
+        </a>
+        <span class="nav-title" id="nav-title" aria-hidden="true"></span>
+        <slot name="controls" />
+      </div>
+    </nav>
+
+    <div class="layout-container">
+      <div class="layout-header-wrapper">
+        <h1 class="layout-header-title" id="page-title">{title}</h1>
+        <p class="layout-meta">
+          {channel && (
+            <>
+              <span class="layout-meta-item">
+                <span class="meta-label">channel</span>
+                <span>{channel}</span>
+              </span>
+              <span class="layout-meta-separator">◆</span>
+            </>
+          )}
+          {model && (
+            <>
+              <span class="layout-meta-item">
+                <span class="meta-label">model</span>
+                <span>{model}</span>
+              </span>
+              <span class="layout-meta-separator">◆</span>
+            </>
+          )}
+          <span class="layout-meta-item">
+            <span class="meta-label">date</span>
+            <span>{date}</span>
+          </span>
+          <span class="layout-meta-separator">◆</span>
+          <span class="layout-meta-item">
+            <span class="meta-label">msgs</span>
+            <span>{regularMessageCount} / {messageCount}</span>
+          </span>
+        </p>
+      </div>
+
+      <main>
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+
+    <script>
+      const nav = document.getElementById('page-nav');
+      const navTitle = document.getElementById('nav-title');
+      const pageTitle = document.getElementById('page-title');
+
+      if (navTitle && pageTitle) {
+        navTitle.textContent = pageTitle.textContent;
+
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            const isHidden = !entry.isIntersecting;
+            navTitle.classList.toggle('visible', isHidden);
+            nav?.classList.toggle('scrolled', isHidden);
+          },
+          { threshold: 0 }
+        );
+
+        observer.observe(pageTitle);
+      }
+    </script>
+  </body>
+</html>

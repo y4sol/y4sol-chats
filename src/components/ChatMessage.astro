@@ -1,0 +1,123 @@
+---
+import { Marked } from 'marked'
+import markedShiki from 'marked-shiki'
+import MessageHeader from './MessageHeader.astro'
+import { getHighlighter } from '../lib/highlighter'
+import { CSS_CLASSES } from '../constants/index.js'
+import '../styles/prose.css'
+
+interface Props {
+  author: string
+  timestamp: string
+  content: string
+  isUser?: boolean
+  isFirstInGroup?: boolean
+  isLastInGroup?: boolean
+  avatarColorIndex?: number
+}
+
+const {
+  author,
+  timestamp,
+  content,
+  isUser,
+  isFirstInGroup = true,
+  isLastInGroup = true,
+  avatarColorIndex,
+} = Astro.props
+
+const authorLower = author.toLowerCase()
+const isAgent = isUser !== undefined
+  ? !isUser
+  : authorLower.includes('agent')
+
+// Use a fresh Marked instance to avoid inheriting any globally-registered
+// extensions (e.g. the link renderer registered in Footer.astro).
+const highlighter = await getHighlighter()
+const md = new Marked()
+md.use(markedShiki({
+  highlight(code, lang) {
+    const loaded = highlighter.getLoadedLanguages()
+    const validLang = (lang && loaded.includes(lang)) ? lang : 'text'
+    return highlighter.codeToHtml(code, {
+      lang: validLang,
+      theme: 'vitesse-dark'
+    })
+  }
+}))
+
+const rawHtml = await md.parse(content)
+// Replace [REDACTED] markers with the TV-static noise element.
+// After markdown parsing, [REDACTED] appears as literal text in the HTML
+// (no following URL → not parsed as a link).
+const REDACTED_HTML =
+  '<span class="redacted-inline" aria-label="Redacted content" title="This content has been redacted">' +
+  '<span class="redacted-noise" aria-hidden="true"></span>' +
+  '<span class="redacted-label" aria-hidden="true">REDACTED</span>' +
+  '</span>'
+const htmlContent = rawHtml.replace(/\[REDACTED\]/g, REDACTED_HTML)
+---
+
+<article
+  class:list={[
+    'chat-message',
+    isLastInGroup ? 'last-in-group' : 'not-last-in-group',
+    !isFirstInGroup && CSS_CLASSES.notFirstInGroup,
+  ]}
+  data-author={author}
+>
+  <MessageHeader
+    author={author}
+    timestamp={timestamp}
+    isFirstInGroup={isFirstInGroup}
+    avatarColorIndex={avatarColorIndex}
+  />
+  <div class:list={['message-body', isAgent ? 'body-agent' : 'body-human']}>
+    <!-- set:html content is trusted (session logs); :global() selectors below
+         target the injected elements that won't carry Astro's scoping attr. -->
+    <div class="message-content prose" set:html={htmlContent} />
+  </div>
+</article>
+
+<style>
+  /* ── Layout ─────────────────────────────────── */
+
+  .chat-message {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Regular messages always carry the full 1.5rem gap below them — the loose
+     spacing marks the end of a speech unit regardless of what follows.
+     No extra top margin is needed: the gap comes from the previous
+     element's margin-bottom, not from the receiver's margin-top. */
+  .last-in-group      { margin-bottom: 1.5rem; }
+  .not-last-in-group  { margin-bottom: 1.5rem; }
+  .not-first-in-group { margin-top: 0; }
+
+  .message-body {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    border-radius: 2px;
+    padding: 1rem 1.5rem;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+  }
+
+  .body-agent {
+    background-color: var(--agent-msg-bg);
+    border: 1px solid var(--agent-msg-border);
+  }
+
+  .body-human {
+    background-color: var(--human-msg-bg);
+    border: 1px solid var(--human-msg-border);
+  }
+
+  .message-content {
+    font-size: 14.5px;
+    line-height: 1.75;
+  }
+</style>

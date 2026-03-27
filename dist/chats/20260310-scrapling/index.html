@@ -1,0 +1,640 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-emdppf7g> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="AI 深度分析 Web 爬虫框架 Scrapling"><title>Scrapling 框架分析 | y4sol-chats - Conversations between Z3R0 and his AI agent y4sol</title><link rel="canonical" href="https://y4sol.netlify.app/chats/20260310-scrapling/"><meta property="og:type" content="article"><meta property="og:title" content="Scrapling 框架分析 | y4sol-chats - Conversations between Z3R0 and his AI agent y4sol"><meta property="og:description" content="AI 深度分析 Web 爬虫框架 Scrapling"><meta property="og:url" content="https://y4sol.netlify.app/chats/20260310-scrapling/"><meta property="og:image" content="https://y4sol.netlify.app/chats/20260310-scrapling/cover.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://y4sol.netlify.app/chats/20260310-scrapling/cover.svg"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"><style>.layout-footer[data-astro-cid-sz7xmlte]{margin-top:5rem;padding-top:2rem;border-top:1px solid var(--border);text-align:left}.layout-footer-text[data-astro-cid-sz7xmlte]{font-family:var(--font-mono);font-size:.6875rem;color:var(--text-muted);letter-spacing:.05em}.layout-footer-link{color:var(--accent-dim);text-decoration:none;transition:color .2s ease}.layout-footer-link:hover{color:var(--accent)}.memory-bg[data-astro-cid-msmhpwtp]{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;overflow:hidden}.memory-orb[data-astro-cid-msmhpwtp]{position:absolute;border-radius:50%;filter:blur(80px);opacity:.4;animation:float 25s ease-in-out infinite}@keyframes float{0%,to{transform:translate(0) scale(1)}25%{transform:translate(6%,4%) scale(1.06)}50%{transform:translate(-4%,10%) scale(.97)}75%{transform:translate(-10%,-3%) scale(1.03)}}.corner-mark[data-astro-cid-5pdox7rj]{position:fixed;width:12px;height:12px;border:1px solid var(--accent-dim);opacity:.4}.corner-mark[data-astro-cid-5pdox7rj].top-left{top:1rem;left:1rem;border-right:none;border-bottom:none}.corner-mark[data-astro-cid-5pdox7rj].top-right{top:1rem;right:1rem;border-left:none;border-bottom:none}.corner-mark[data-astro-cid-5pdox7rj].bottom-left{bottom:1rem;left:1rem;border-right:none;border-top:none}.corner-mark[data-astro-cid-5pdox7rj].bottom-right{bottom:1rem;right:1rem;border-left:none;border-top:none}:root{--font-mono: "IBM Plex Mono", monospace;--font-sans: "IBM Plex Sans", system-ui, sans-serif;--font-serif: "Fraunces", Georgia, serif;--bg-primary: #0a0a0a;--bg-secondary: #141414;--bg-tertiary: #1a1a1a;--text-primary: #e8e6e3;--text-secondary: #8a8785;--text-muted: #5c5958;--text-prose: #a8a7a5;--text-td: #c5c4c2;--text-bold: #ffffff;--accent: #d4a853;--accent-dim: #8b7038;--accent-hover: #e8c678;--border: #2a2a2a;--glow: rgba(212, 168, 83, .15);--human-msg-bg: #0c0c0c;--human-msg-border: #1c1c1c;--agent-msg-bg: #181818;--agent-msg-border: #272727;--redacted-bg: #0d0808;--redacted-border: #4a2020;--redacted-label: #ff5555;--redacted-label-glow: rgba(255, 85, 85, .6);--redacted-glow: rgba(255, 85, 85, .08);--collapsible-error-border: #ef4444;--collapsible-error-accent: #f87171;--collapsible-session-border: #10b981;--collapsible-session-accent: #34d399;--collapsible-custom-border: #6366f1;--collapsible-custom-accent: #818cf8;--collapsible-muted-border: #6b7280;--collapsible-muted-accent: #9ca3af}*,*:before,*:after{box-sizing:border-box}html{background:var(--bg-primary)}body{margin:0;font-family:var(--font-sans);color:var(--text-primary);line-height:1.7;min-height:100vh;position:relative;overflow-x:hidden}article[data-collapsible=true]{display:none}body.show-process article[data-collapsible=true]{display:flex}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);z-index:9999}
+</style>
+<link rel="stylesheet" href="/_astro/index.BDVyw17I.css"></head> <body data-astro-cid-emdppf7g> <div class="memory-bg" data-astro-cid-msmhpwtp> <div class="memory-orb" style="width: 55vw; height: 55vw; background: rgba(180, 140, 100, 0.12); top: -15%; left: -10%;" data-astro-cid-msmhpwtp></div> <div class="memory-orb" style="width: 45vw; height: 45vw; background: rgba(140, 100, 160, 0.1); top: 35%; right: -12%; animation-delay: -7s;" data-astro-cid-msmhpwtp></div> <div class="memory-orb" style="width: 40vw; height: 40vw; background: rgba(100, 130, 170, 0.08); bottom: -15%; left: 25%; animation-delay: -14s;" data-astro-cid-msmhpwtp></div> <div class="memory-orb" style="width: 30vw; height: 30vw; background: rgba(160, 130, 110, 0.07); top: 55%; left: -5%; animation-delay: -10s;" data-astro-cid-msmhpwtp></div> </div>  <!-- Fixed decorative corner marks (retro terminal aesthetic) --><div class="corner-mark top-left" aria-hidden="true" data-astro-cid-5pdox7rj></div> <div class="corner-mark top-right" aria-hidden="true" data-astro-cid-5pdox7rj></div> <div class="corner-mark bottom-left" aria-hidden="true" data-astro-cid-5pdox7rj></div> <div class="corner-mark bottom-right" aria-hidden="true" data-astro-cid-5pdox7rj></div>  <nav class="page-nav" id="page-nav" data-astro-cid-emdppf7g> <div class="page-nav-inner" data-astro-cid-emdppf7g> <a href="/" class="back-link" data-astro-cid-emdppf7g> <span aria-hidden="true" data-astro-cid-emdppf7g>←</span> archive
+</a> <span class="nav-title" id="nav-title" aria-hidden="true" data-astro-cid-emdppf7g></span> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="27sBYJ" prefix="r19" component-url="/_astro/ShowProcessToggle.CaepIudC.js" component-export="ShowProcessToggle" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;slot&quot;:[0,&quot;controls&quot;],&quot;defaultShow&quot;:[0,false]}" ssr client="load" opts="{&quot;name&quot;:&quot;ShowProcessToggle&quot;,&quot;value&quot;:true}" await-children><button type="button" class="ShowProcessToggle-module__toggleBtn___nsdLZ ShowProcessToggle-module__toggleBtnHidden___xUsPO" aria-label="Show process information" aria-pressed="true"><span class="ShowProcessToggle-module__togglePip___Qd4mO ShowProcessToggle-module__togglePipHidden___A2YEM" aria-hidden="true"></span><span>show process</span></button><!--astro:end--></astro-island> </div> </nav> <div class="layout-container" data-astro-cid-emdppf7g> <div class="layout-header-wrapper" data-astro-cid-emdppf7g> <h1 class="layout-header-title" id="page-title" data-astro-cid-emdppf7g>Scrapling 框架分析</h1> <p class="layout-meta" data-astro-cid-emdppf7g>  <span class="layout-meta-item" data-astro-cid-emdppf7g> <span class="meta-label" data-astro-cid-emdppf7g>channel</span> <span data-astro-cid-emdppf7g>discord</span> </span> <span class="layout-meta-separator" data-astro-cid-emdppf7g>◆</span>   <span class="layout-meta-item" data-astro-cid-emdppf7g> <span class="meta-label" data-astro-cid-emdppf7g>date</span> <span data-astro-cid-emdppf7g>2026-03-10</span> </span> <span class="layout-meta-separator" data-astro-cid-emdppf7g>◆</span> <span class="layout-meta-item" data-astro-cid-emdppf7g> <span class="meta-label" data-astro-cid-emdppf7g>msgs</span> <span data-astro-cid-emdppf7g>5 / 0</span> </span> </p> </div> <main data-astro-cid-emdppf7g> <script>(()=>{var a=(s,i,o)=>{let r=async()=>{await(await s())()},t=typeof i.value=="object"?i.value:void 0,c={rootMargin:t==null?void 0:t.rootMargin},n=new IntersectionObserver(e=>{for(let l of e)if(l.isIntersecting){n.disconnect(),r();break}},c);for(let e of o.children)n.observe(e)};(self.Astro||(self.Astro={})).visible=a;window.dispatchEvent(new Event("astro:visible"));})();</script><astro-island uid="ZYAfE2" prefix="r1" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;session&quot;],&quot;icon&quot;:[0,&quot;✅&quot;],&quot;label&quot;:[0,&quot;Session Initialized ~&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;&quot;],&quot;author&quot;:[0,&quot;&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:18:16.838000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,true],&quot;isLastInGroup&quot;:[0,true],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleLastInGroup___eHDCE"><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI CollapsibleMessage-module__collapsibleToggleDisabled___VyE5m" disabled="" aria-disabled="true"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">✅</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Session Initialized ~</span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"></div></div></div></div></div></article><!--astro:end--></astro-island><article class="chat-message last-in-group" data-author="y4sol" data-astro-cid-lf3k52wd> <div class="message-header" data-header="true" data-astro-cid-qgtp6nvi><div class="avatar avatar-human" data-astro-cid-qgtp6nvi>Y</div><span class="author-name" data-astro-cid-qgtp6nvi>y4sol</span><span class="author-timestamp" title="2026-03-10 22:18:27" data-astro-cid-qgtp6nvi>22:18</span></div> <div class="message-body body-agent" data-astro-cid-lf3k52wd> <!-- set:html content is trusted (session logs); :global() selectors below
+         target the injected elements that won't carry Astro's scoping attr. --> <div class="message-content prose" data-astro-cid-lf3k52wd><p>Hey! 👾 今晚想搞点啥？</p>
+</div> </div> </article> <article class="chat-message last-in-group" data-author="Z3R0" data-astro-cid-lf3k52wd> <div class="message-header" data-header="true" data-astro-cid-qgtp6nvi><div class="avatar avatar-human" style="background-color: #3b4a5a; color: #e8eaed" data-astro-cid-qgtp6nvi>Z</div><span class="author-name" data-astro-cid-qgtp6nvi>Z3R0</span><span class="author-timestamp" title="2026-03-10 22:18:32" data-astro-cid-qgtp6nvi>22:18</span></div> <div class="message-body body-human" data-astro-cid-lf3k52wd> <!-- set:html content is trusted (session logs); :global() selectors below
+         target the injected elements that won't carry Astro's scoping attr. --> <div class="message-content prose" data-astro-cid-lf3k52wd><p><a href="https://github.com/D4Vinci/Scrapling%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90">https://github.com/D4Vinci/Scrapling深度分析</a></p>
+</div> </div> </article> <astro-island uid="Z1H4iAJ" prefix="r2" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;thinking_level_change&quot;],&quot;icon&quot;:[0,&quot;🧠&quot;],&quot;label&quot;:[0,&quot;Thinking&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;The user wants me to deeply analyze the Scrapling repository on GitHub. Let me fetch information about this repository.&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:18:48.529000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,true],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg"><div class="CollapsibleMessage-module__messageHeader___7F9by" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:18:48">22:18</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🧠</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Thinking</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p>The user wants me to deeply analyze the Scrapling repository on GitHub. Let me fetch information about this repository.</p></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Z1oNl0P" prefix="r3" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;custom&quot;],&quot;icon&quot;:[0,&quot;🔧&quot;],&quot;label&quot;:[0,&quot;Tool Call - exec&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;**Command**:\n```\ncurl -sL \&quot;https://api.github.com/repos/D4Vinci/Scrapling\&quot; | jq -r &#39;.description,.stargazers_count,.forks_count,.language,.topics,.open_issues_count&#39;\n```\n\n***\n\n```\n🕷️ An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl!\n27901\n2071\nPython\n[\n  \&quot;ai\&quot;,\n  \&quot;ai-scraping\&quot;,\n  \&quot;automation\&quot;,\n  \&quot;crawler\&quot;,\n  \&quot;crawling\&quot;,\n  \&quot;crawling-python\&quot;,\n  \&quot;data\&quot;,\n  \&quot;data-extraction\&quot;,\n  \&quot;mcp\&quot;,\n  \&quot;mcp-server\&quot;,\n  \&quot;playwright\&quot;,\n  \&quot;python\&quot;,\n  \&quot;scraping\&quot;,\n  \&quot;selectors\&quot;,\n  \&quot;stealth\&quot;,\n  \&quot;web-scraper\&quot;,\n  \&quot;web-scraping\&quot;,\n  \&quot;web-scraping-python\&quot;,\n  \&quot;webscraping\&quot;,\n  \&quot;xpath\&quot;\n]\n2\n```&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:18:48.529000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:18:48">22:18</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🔧</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Tool Call - exec</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p><strong>Command</strong>:</p>
+<pre><code node="[object Object]">curl -sL &quot;https://api.github.com/repos/D4Vinci/Scrapling&quot; | jq -r &#x27;.description,.stargazers_count,.forks_count,.language,.topics,.open_issues_count&#x27;
+</code></pre>
+<hr/>
+<pre><code node="[object Object]">🕷️ An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl!
+27901
+2071
+Python
+[
+  &quot;ai&quot;,
+  &quot;ai-scraping&quot;,
+  &quot;automation&quot;,
+  &quot;crawler&quot;,
+  &quot;crawling&quot;,
+  &quot;crawling-python&quot;,
+  &quot;data&quot;,
+  &quot;data-extraction&quot;,
+  &quot;mcp&quot;,
+  &quot;mcp-server&quot;,
+  &quot;playwright&quot;,
+  &quot;python&quot;,
+  &quot;scraping&quot;,
+  &quot;selectors&quot;,
+  &quot;stealth&quot;,
+  &quot;web-scraper&quot;,
+  &quot;web-scraping&quot;,
+  &quot;web-scraping-python&quot;,
+  &quot;webscraping&quot;,
+  &quot;xpath&quot;
+]
+2
+</code></pre></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="2vsUsN" prefix="r4" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;thinking_level_change&quot;],&quot;icon&quot;:[0,&quot;🧠&quot;],&quot;label&quot;:[0,&quot;Thinking&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;Let me get more details about the repository structure and key files.&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:18:57.166000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:18:57">22:18</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🧠</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Thinking</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p>Let me get more details about the repository structure and key files.</p></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Z2nx8Uo" prefix="r5" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;custom&quot;],&quot;icon&quot;:[0,&quot;🔧&quot;],&quot;label&quot;:[0,&quot;Tool Call - exec&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;**Command**:\n```\ncurl -sL \&quot;https://api.github.com/repos/D4Vinci/Scrapling/contents\&quot; | jq -r &#39;.[] | .name,.type&#39; | paste - -\n```\n\n***\n\n```\n.bandit.yml\tfile\n.dockerignore\tfile\n.github\tdir\n.gitignore\tfile\n.pre-commit-config.yaml\tfile\n.readthedocs.yaml\tfile\nCODE_OF_CONDUCT.md\tfile\nCONTRIBUTING.md\tfile\nDockerfile\tfile\nLICENSE\tfile\nMANIFEST.in\tfile\nREADME.md\tfile\nROADMAP.md\tfile\nagent-skill\tdir\nbenchmarks.py\tfile\ncleanup.py\tfile\ndocs\tdir\nimages\tdir\npyproject.toml\tfile\npytest.ini\tfile\nruff.toml\tfile\nscrapling\tdir\nserver.json\tfile\nsetup.cfg\tfile\ntests\tdir\ntox.ini\tfile\nzensical.toml\tfile\n```&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:18:57.166000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:18:57">22:18</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🔧</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Tool Call - exec</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p><strong>Command</strong>:</p>
+<pre><code node="[object Object]">curl -sL &quot;https://api.github.com/repos/D4Vinci/Scrapling/contents&quot; | jq -r &#x27;.[] | .name,.type&#x27; | paste - -
+</code></pre>
+<hr/>
+<pre><code node="[object Object]">.bandit.yml	file
+.dockerignore	file
+.github	dir
+.gitignore	file
+.pre-commit-config.yaml	file
+.readthedocs.yaml	file
+CODE_OF_CONDUCT.md	file
+CONTRIBUTING.md	file
+Dockerfile	file
+LICENSE	file
+MANIFEST.in	file
+README.md	file
+ROADMAP.md	file
+agent-skill	dir
+benchmarks.py	file
+cleanup.py	file
+docs	dir
+images	dir
+pyproject.toml	file
+pytest.ini	file
+ruff.toml	file
+scrapling	dir
+server.json	file
+setup.cfg	file
+tests	dir
+tox.ini	file
+zensical.toml	file
+</code></pre></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Z1QuMkF" prefix="r6" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;thinking_level_change&quot;],&quot;icon&quot;:[0,&quot;🧠&quot;],&quot;label&quot;:[0,&quot;Thinking&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;This looks like a comprehensive web scraping framework. Let me get the README to understand the core features and architecture.&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:19:20.585000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:19:20">22:19</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🧠</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Thinking</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p>This looks like a comprehensive web scraping framework. Let me get the README to understand the core features and architecture.</p></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="LLQJq" prefix="r7" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;custom&quot;],&quot;icon&quot;:[0,&quot;🔧&quot;],&quot;label&quot;:[0,&quot;Tool Call - exec&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;**Command**:\n```\ncurl -sL \&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/README.md\&quot; | head -200\n```\n\n***\n\n````\n&lt;!-- mcp-name: io.github.D4Vinci/Scrapling --&gt;\n\n&lt;h1 align=\&quot;center\&quot;&gt;\n    &lt;a href=\&quot;https://scrapling.readthedocs.io\&quot;&gt;\n        &lt;picture&gt;\n          &lt;source media=\&quot;(prefers-color-scheme: dark)\&quot; srcset=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/docs/assets/cover_dark.svg?sanitize=true\&quot;&gt;\n          &lt;img alt=\&quot;Scrapling Poster\&quot; src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/docs/assets/cover_light.svg?sanitize=true\&quot;&gt;\n        &lt;/picture&gt;\n    &lt;/a&gt;\n    &lt;br&gt;\n    &lt;small&gt;Effortless Web Scraping for the Modern Web&lt;/small&gt;\n&lt;/h1&gt;\n\n&lt;p align=\&quot;center\&quot;&gt;\n    &lt;a href=\&quot;https://trendshift.io/repositories/14244\&quot; target=\&quot;_blank\&quot;&gt;&lt;img src=\&quot;https://trendshift.io/api/badge/repositories/14244\&quot; alt=\&quot;D4Vinci%2FScrapling | Trendshift\&quot; style=\&quot;width: 250px; height: 55px;\&quot; width=\&quot;250\&quot; height=\&quot;55\&quot;/&gt;&lt;/a&gt;\n    &lt;br/&gt;\n    &lt;a href=\&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_AR.md\&quot;&gt;العربيه&lt;/a&gt; | &lt;a href=\&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_ES.md\&quot;&gt;Español&lt;/a&gt; | &lt;a href=\&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_FR.md\&quot;&gt;Français&lt;/a&gt; | &lt;a href=\&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_DE.md\&quot;&gt;Deutsch&lt;/a&gt; | &lt;a href=\&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_CN.md\&quot;&gt;简体中文&lt;/a&gt; | &lt;a href=\&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_JP.md\&quot;&gt;日本語&lt;/a&gt; |  &lt;a href=\&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_RU.md\&quot;&gt;Русский&lt;/a&gt;\n    &lt;br/&gt;\n    &lt;a href=\&quot;https://github.com/D4Vinci/Scrapling/actions/workflows/tests.yml\&quot; alt=\&quot;Tests\&quot;&gt;\n        &lt;img alt=\&quot;Tests\&quot; src=\&quot;https://github.com/D4Vinci/Scrapling/actions/workflows/tests.yml/badge.svg\&quot;&gt;&lt;/a&gt;\n    &lt;a href=\&quot;https://badge.fury.io/py/Scrapling\&quot; alt=\&quot;PyPI version\&quot;&gt;\n        &lt;img alt=\&quot;PyPI version\&quot; src=\&quot;https://badge.fury.io/py/Scrapling.svg\&quot;&gt;&lt;/a&gt;\n    &lt;a href=\&quot;https://pepy.tech/project/scrapling\&quot; alt=\&quot;PyPI Downloads\&quot;&gt;\n        &lt;img alt=\&quot;PyPI Downloads\&quot; src=\&quot;https://static.pepy.tech/personalized-badge/scrapling?period=total&amp;units=INTERNATIONAL_SYSTEM&amp;left_color=GREY&amp;right_color=GREEN&amp;left_text=Downloads\&quot;&gt;&lt;/a&gt;\n    &lt;a href=\&quot;https://github.com/D4Vinci/Scrapling/tree/main/agent-skill\&quot; alt=\&quot;AI Agent Skill directory\&quot;&gt;\n        &lt;img alt=\&quot;Static Badge\&quot; src=\&quot;https://img.shields.io/badge/Skill-black?style=flat&amp;label=Agent&amp;link=https%3A%2F%2Fgithub.com%2FD4Vinci%2FScrapling%2Ftree%2Fmain%2Fagent-skill\&quot;&gt;&lt;/a&gt;\n    &lt;a href=\&quot;https://clawhub.ai/D4Vinci/scrapling-official\&quot; alt=\&quot;OpenClaw Skill\&quot;&gt;\n        &lt;img alt=\&quot;OpenClaw Skill\&quot; src=\&quot;https://img.shields.io/badge/Clawhub-darkred?style=flat&amp;label=OpenClaw&amp;link=https%3A%2F%2Fclawhub.ai%2FD4Vinci%2Fscrapling-official\&quot;&gt;&lt;/a&gt;\n    &lt;br/&gt;\n    &lt;a href=\&quot;https://discord.gg/EMgGbDceNQ\&quot; alt=\&quot;Discord\&quot; target=\&quot;_blank\&quot;&gt;\n      &lt;img alt=\&quot;Discord\&quot; src=\&quot;https://img.shields.io/discord/1360786381042880532?style=social&amp;logo=discord&amp;link=https%3A%2F%2Fdiscord.gg%2FEMgGbDceNQ\&quot;&gt;\n    &lt;/a&gt;\n    &lt;a href=\&quot;https://x.com/Scrapling_dev\&quot; alt=\&quot;X (formerly Twitter)\&quot;&gt;\n      &lt;img alt=\&quot;X (formerly Twitter) Follow\&quot; src=\&quot;https://img.shields.io/twitter/follow/Scrapling_dev?style=social&amp;logo=x&amp;link=https%3A%2F%2Fx.com%2FScrapling_dev\&quot;&gt;\n    &lt;/a&gt;\n    &lt;br/&gt;\n    &lt;a href=\&quot;https://pypi.org/project/scrapling/\&quot; alt=\&quot;Supported Python versions\&quot;&gt;\n        &lt;img alt=\&quot;Supported Python versions\&quot; src=\&quot;https://img.shields.io/pypi/pyversions/scrapling.svg\&quot;&gt;&lt;/a&gt;\n&lt;/p&gt;\n\n&lt;p align=\&quot;center\&quot;&gt;\n    &lt;a href=\&quot;https://scrapling.readthedocs.io/en/latest/parsing/selection/\&quot;&gt;&lt;strong&gt;Selection methods&lt;/strong&gt;&lt;/a&gt;\n    &amp;middot;\n    &lt;a href=\&quot;https://scrapling.readthedocs.io/en/latest/fetching/choosing/\&quot;&gt;&lt;strong&gt;Fetchers&lt;/strong&gt;&lt;/a&gt;\n    &amp;middot;\n    &lt;a href=\&quot;https://scrapling.readthedocs.io/en/latest/spiders/architecture.html\&quot;&gt;&lt;strong&gt;Spiders&lt;/strong&gt;&lt;/a&gt;\n    &amp;middot;\n    &lt;a href=\&quot;https://scrapling.readthedocs.io/en/latest/spiders/proxy-blocking.html\&quot;&gt;&lt;strong&gt;Proxy Rotation&lt;/strong&gt;&lt;/a&gt;\n    &amp;middot;\n    &lt;a href=\&quot;https://scrapling.readthedocs.io/en/latest/cli/overview/\&quot;&gt;&lt;strong&gt;CLI&lt;/strong&gt;&lt;/a&gt;\n    &amp;middot;\n    &lt;a href=\&quot;https://scrapling.readthedocs.io/en/latest/ai/mcp-server/\&quot;&gt;&lt;strong&gt;MCP&lt;/strong&gt;&lt;/a&gt;\n&lt;/p&gt;\n\nScrapling is an adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl.\n\nIts parser learns from website changes and automatically relocates your elements when pages update. Its fetchers bypass anti-bot systems like Cloudflare Turnstile out of the box. And its spider framework lets you scale up to concurrent, multi-session crawls with pause/resume and automatic proxy rotation — all in a few lines of Python. One library, zero compromises.\n\nBlazing fast crawls with real-time stats and streaming. Built by Web Scrapers for Web Scrapers and regular users, there&#39;s something for everyone.\n\n```python\nfrom scrapling.fetchers import Fetcher, AsyncFetcher, StealthyFetcher, DynamicFetcher\nStealthyFetcher.adaptive = True\np = StealthyFetcher.fetch(&#39;https://example.com&#39;, headless=True, network_idle=True)  # Fetch website under the radar!\nproducts = p.css(&#39;.product&#39;, auto_save=True)                                        # Scrape data that survives website design changes!\nproducts = p.css(&#39;.product&#39;, adaptive=True)                                         # Later, if the website structure changes, pass `adaptive=True` to find them!\n```\nOr scale up to full crawls\n```python\nfrom scrapling.spiders import Spider, Response\n\nclass MySpider(Spider):\n  name = \&quot;demo\&quot;\n  start_urls = [\&quot;https://example.com/\&quot;]\n\n  async def parse(self, response: Response):\n      for item in response.css(&#39;.product&#39;):\n          yield {\&quot;title\&quot;: item.css(&#39;h2::text&#39;).get()}\n\nMySpider().start()\n```\n\n&lt;p align=\&quot;center\&quot;&gt;\n    &lt;a href=\&quot;https://dataimpulse.com/?utm_source=scrapling&amp;utm_medium=banner&amp;utm_campaign=scrapling\&quot; target=\&quot;_blank\&quot; style=\&quot;display:flex; justify-content:center; padding:4px 0;\&quot;&gt;\n        &lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/DataImpulse.png\&quot; alt=\&quot;At DataImpulse, we specialize in developing custom proxy services for your business. Make requests from anywhere, collect data, and enjoy fast connections with our premium proxies.\&quot; style=\&quot;max-height:60px;\&quot;&gt;\n    &lt;/a&gt;\n&lt;/p&gt;\n\n# Platinum Sponsors\n&lt;table&gt;\n  &lt;tr&gt;\n    &lt;td width=\&quot;200\&quot;&gt;\n      &lt;a href=\&quot;https://hypersolutions.co/?utm_source=github&amp;utm_medium=readme&amp;utm_campaign=scrapling\&quot; target=\&quot;_blank\&quot; title=\&quot;Bot Protection Bypass API for Akamai, DataDome, Incapsula &amp; Kasada\&quot;&gt;\n        &lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/HyperSolutions.png\&quot;&gt;\n        &lt;br /&gt;\n      &lt;/a&gt;\n    &lt;/td&gt;\n    &lt;td&gt; Scrapling handles Cloudflare Turnstile. For enterprise-grade protection, &lt;a href=\&quot;https://hypersolutions.co?utm_source=github&amp;utm_medium=readme&amp;utm_campaign=scrapling\&quot;&gt;\n        &lt;b&gt;Hyper Solutions&lt;/b&gt;\n      &lt;/a&gt; provides API endpoints that generate valid antibot tokens for &lt;b&gt;Akamai&lt;/b&gt;, &lt;b&gt;DataDome&lt;/b&gt;, &lt;b&gt;Kasada&lt;/b&gt;, and &lt;b&gt;Incapsula&lt;/b&gt;. Simple API calls, no browser automation required. &lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td width=\&quot;200\&quot;&gt;\n      &lt;a href=\&quot;https://birdproxies.com/t/scrapling\&quot; target=\&quot;_blank\&quot; title=\&quot;At Bird Proxies, we eliminate your pains such as banned IPs, geo restriction, and high costs so you can focus on your work.\&quot;&gt;\n        &lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/BirdProxies.jpg\&quot;&gt;\n        &lt;br /&gt;\n      &lt;/a&gt;\n    &lt;/td&gt;\n    &lt;td&gt;Hey, we built &lt;a href=\&quot;https://birdproxies.com/t/scrapling\&quot;&gt;\n        &lt;b&gt;BirdProxies&lt;/b&gt;\n      &lt;/a&gt; because proxies shouldn&#39;t be complicated or overpriced. Fast residential and ISP proxies in 195+ locations, fair pricing, and real support. &lt;br /&gt;\n      &lt;b&gt;Try our FlappyBird game on the landing page for free data!&lt;/b&gt;\n    &lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td width=\&quot;200\&quot;&gt;\n      &lt;a href=\&quot;https://evomi.com?utm_source=github&amp;utm_medium=banner&amp;utm_campaign=d4vinci-scrapling\&quot; target=\&quot;_blank\&quot; title=\&quot;Evomi is your Swiss Quality Proxy Provider, starting at $0.49/GB\&quot;&gt;\n        &lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/evomi.png\&quot;&gt;\n        &lt;br /&gt;\n      &lt;/a&gt;\n    &lt;/td&gt;\n    &lt;td&gt;\n      &lt;a href=\&quot;https://evomi.com?utm_source=github&amp;utm_medium=banner&amp;utm_campaign=d4vinci-scrapling\&quot;&gt;\n        &lt;b&gt;Evomi&lt;/b&gt;\n      &lt;/a&gt;: residential proxies from $0.49/GB. Scraping browser with fully spoofed Chromium, residential IPs, auto CAPTCHA solving, and anti-bot bypass. &lt;/br&gt;\n      &lt;b&gt;Scraper API for hassle-free results. MCP and N8N integrations are available.&lt;/b&gt;\n    &lt;/td&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td width=\&quot;200\&quot;&gt;\n      &lt;a href=\&quot;https://tikhub.io/?ref=KarimShoair\&quot; target=\&quot;_blank\&quot; title=\&quot;Unlock the Power of Social Media Data &amp; AI\&quot;&gt;\n        &lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/TikHub.jpg\&quot;&gt;\n        &lt;br /&gt;\n      &lt;/a&gt;\n    &lt;/td&gt;\n    &lt;td&gt;\n      &lt;a href=\&quot;https://tikhub.io/?ref=KarimShoair\&quot; target=\&quot;_blank\&quot;&gt;TikHub.io&lt;/a&gt; provides 900+ stable APIs across 16+ platforms including TikTok, X, YouTube &amp; Instagram, with 40M+ datasets. &lt;br /&gt; Also offers &lt;a href=\&quot;https://ai.tikhub.io/?ref=KarimShoair\&quot; target=\&quot;_blank\&quot;&gt;DISCOUNTED AI models&lt;/a&gt; — Claude, GPT, GEMINI &amp; more up to 71% off.\n    &lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;\n\n&lt;i&gt;&lt;sub&gt;Do you want to show your ad here? Click [here](https://github.com/sponsors/D4Vinci/sponsorships?tier_id=586646)&lt;/sub&gt;&lt;/i&gt;\n# Sponsors \n\n&lt;!-- sponsors --&gt;\n\n&lt;a href=\&quot;https://serpapi.com/?utm_source=scrapling\&quot; target=\&quot;_blank\&quot; title=\&quot;Scrape Google and other search engines with SerpApi\&quot;&gt;&lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/SerpApi.png\&quot;&gt;&lt;/a&gt;\n&lt;a href=\&quot;https://visit.decodo.com/Dy6W0b\&quot; target=\&quot;_blank\&quot; title=\&quot;Try the Most Efficient Residential Proxies for Free\&quot;&gt;&lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/decodo.png\&quot;&gt;&lt;/a&gt;\n&lt;a href=\&quot;https://petrosky.io/d4vinci\&quot; target=\&quot;_blank\&quot; title=\&quot;PetroSky delivers cutting-edge VPS hosting.\&quot;&gt;&lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/petrosky.png\&quot;&gt;&lt;/a&gt;\n&lt;a href=\&quot;https://hasdata.com/?utm_source=github&amp;utm_medium=banner&amp;utm_campaign=D4Vinci\&quot; target=\&quot;_blank\&quot; title=\&quot;The web scraping service that actually beats anti-bot systems!\&quot;&gt;&lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/hasdata.png\&quot;&gt;&lt;/a&gt;\n&lt;a href=\&quot;https://proxyempire.io/?ref=scrapling&amp;utm_source=scrapling\&quot; target=\&quot;_blank\&quot; title=\&quot;Collect The Data Your Project Needs with the Best Residential Proxies\&quot;&gt;&lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/ProxyEmpire.png\&quot;&gt;&lt;/a&gt;\n\n\n&lt;a href=\&quot;https://www.swiftproxy.net/\&quot; target=\&quot;_blank\&quot; title=\&quot;Unlock Reliable Proxy Services with Swiftproxy!\&quot;&gt;&lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/swiftproxy.png\&quot;&gt;&lt;/a&gt;\n&lt;a href=\&quot;https://www.rapidproxy.io/?ref=d4v\&quot; target=\&quot;_blank\&quot; title=\&quot;Affordable Access to the Proxy World – bypass CAPTCHAs blocks, and avoid additional costs.\&quot;&gt;&lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/rapidproxy.jpg\&quot;&gt;&lt;/a&gt;\n&lt;a href=\&quot;https://browser.cash/?utm_source=D4Vinci&amp;utm_medium=referral\&quot; target=\&quot;_blank\&quot; title=\&quot;Browser Automation &amp; AI Browser Agent Platform\&quot;&gt;&lt;img src=\&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/browserCash.png\&quot;&gt;&lt;/a&gt;\n\n&lt;!-- /sponsors --&gt;\n\n&lt;i&gt;&lt;sub&gt;Do you want to show your ad here? Click [here](https://github.com/sponsors/D4Vinci) and choose the tier that suites you!&lt;/sub&gt;&lt;/i&gt;\n\n---\n\n## Key Features\n\n### Spiders — A Full Crawling Framework\n- 🕷️ **Scrapy-like Spider API**: Define spiders with `start_urls`, async `parse` callbacks, and `Request`/`Response` objects.\n- ⚡ **Concurrent Crawling**: Configurable concurrency limits, per-domain throttling, and download delays.\n- 🔄 **Multi-Session Support**: Unified interface for HTTP requests, and stealthy headless browsers in a single spider — route requests to different sessions by ID.\n- 💾 **Pause &amp; Resume**: Checkpoint-based crawl persistence. Press Ctrl+C for a graceful shutdown; restart to resume from where you left off.\n- 📡 **Streaming Mode**: Stream scraped items as they arrive via `async for item in spider.stream()` with real-time stats — ideal for UI, pipelines, and long-running crawls.\n- 🛡️ **Blocked Request Detection**: Automatic detection and retry of blocked requests with customizable logic.\n- 📦 **Built-in Export**: Export results through hooks and your own pipeline or the built-in JSON/JSONL with `result.items.to_json()` / `result.items.to_jsonl()` respectively.\n\n### Advanced Websites Fetching with Session Support\n- **HTTP Requests**: Fast and stealthy HTTP requests with the `Fetcher` class. Can impersonate browsers&#39; TLS fingerprint, headers, and use HTTP/3.\n- **Dynamic Loading**: Fetch dynamic websites with full browser automation through the `DynamicFetcher` class supporting Playwright&#39;s Chromium and Google&#39;s Chrome.\n- **Anti-bot Bypass**: Advanced stealth capabilities with `StealthyFetcher` and fingerprint spoofing. Can easily bypass all types of Cloudflare&#39;s Turnstile/Interstitial with automation.\n- **Session Management**: Persistent session support with `FetcherSession`, `StealthySession`, and `DynamicSession` classes for cookie and state management across requests.\n- **Proxy Rotation**: Built-in `ProxyRotator` with cyclic or custom rotation strategies across all session types, plus per-request proxy overrides.\n- **Domain Blocking**: Block requests to specific domains (and their subdomains) in browser-based fetchers.\n- **Async Support**: Complete async support across all fetchers and dedicated async session classes.\n\n### Adaptive Scraping &amp; AI Integration\n- 🔄 **Smart Element Tracking**: Relocate elements after website changes using intelligent similarity algorithms.\n- 🎯 **Smart Flexible Selection**: CSS selectors, XPath selectors, filter-based search, text search, regex search, and more.\n- 🔍 **Find Similar Elements**: Automatically locate elements similar to found elements.\n- 🤖 **MCP Server to be used with AI**: Built-in MCP server for AI-assisted Web Scraping and data extraction. The MCP server features powerful, custom capabilities that leverage Scrapling to extract targeted content before passing it to the AI (Claude/Cursor/etc), thereby speeding up operations and reducing costs by minimizing token usage. ([demo video](https://www.youtube.com/watch?v=qyFk3ZNwOxE))\n\n### High-Performance &amp; battle-tested Architecture\n- 🚀 **Lightning Fast**: Optimized performance outperforming most Python scraping libraries.\n- 🔋 **Memory Efficient**: Optimized data structures and lazy loading for a minimal memory footprint.\n- ⚡ **Fast JSON Serialization**: 10x faster than the standard library.\n- 🏗️ **Battle tested**: Not only does Scrapling have 92% test coverage and full type hints coverage, but it has been used daily by hundreds of Web Scrapers over the past year.\n\n### Developer/Web Scraper Friendly Experience\n- 🎯 **Interactive Web Scraping Shell**: Optional built-in IPython shell with Scrapling integration, shortcuts, and new tools to speed up Web Scraping scripts development, like converting curl requests to Scrapling requests and viewing requests results in your browser.\n- 🚀 **Use it directly from the Terminal**: Optionally, you can use Scrapling to scrape a URL without writing a single line of code!\n- 🛠️ **Rich Navigation API**: Advanced DOM traversal with parent, sibling, and child navigation methods.\n- 🧬 **Enhanced Text Processing**: Built-in regex, cleaning methods, and optimized string operations.\n````&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:19:20.585000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:19:20">22:19</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🔧</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Tool Call - exec</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p><strong>Command</strong>:</p>
+<pre><code node="[object Object]">curl -sL &quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/README.md&quot; | head -200
+</code></pre>
+<hr/>
+<pre><code node="[object Object]">&lt;!-- mcp-name: io.github.D4Vinci/Scrapling --&gt;
+
+&lt;h1 align=&quot;center&quot;&gt;
+    &lt;a href=&quot;https://scrapling.readthedocs.io&quot;&gt;
+        &lt;picture&gt;
+          &lt;source media=&quot;(prefers-color-scheme: dark)&quot; srcset=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/docs/assets/cover_dark.svg?sanitize=true&quot;&gt;
+          &lt;img alt=&quot;Scrapling Poster&quot; src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/docs/assets/cover_light.svg?sanitize=true&quot;&gt;
+        &lt;/picture&gt;
+    &lt;/a&gt;
+    &lt;br&gt;
+    &lt;small&gt;Effortless Web Scraping for the Modern Web&lt;/small&gt;
+&lt;/h1&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;a href=&quot;https://trendshift.io/repositories/14244&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://trendshift.io/api/badge/repositories/14244&quot; alt=&quot;D4Vinci%2FScrapling | Trendshift&quot; style=&quot;width: 250px; height: 55px;&quot; width=&quot;250&quot; height=&quot;55&quot;/&gt;&lt;/a&gt;
+    &lt;br/&gt;
+    &lt;a href=&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_AR.md&quot;&gt;العربيه&lt;/a&gt; | &lt;a href=&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_ES.md&quot;&gt;Español&lt;/a&gt; | &lt;a href=&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_FR.md&quot;&gt;Français&lt;/a&gt; | &lt;a href=&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_DE.md&quot;&gt;Deutsch&lt;/a&gt; | &lt;a href=&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_CN.md&quot;&gt;简体中文&lt;/a&gt; | &lt;a href=&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_JP.md&quot;&gt;日本語&lt;/a&gt; |  &lt;a href=&quot;https://github.com/D4Vinci/Scrapling/blob/main/docs/README_RU.md&quot;&gt;Русский&lt;/a&gt;
+    &lt;br/&gt;
+    &lt;a href=&quot;https://github.com/D4Vinci/Scrapling/actions/workflows/tests.yml&quot; alt=&quot;Tests&quot;&gt;
+        &lt;img alt=&quot;Tests&quot; src=&quot;https://github.com/D4Vinci/Scrapling/actions/workflows/tests.yml/badge.svg&quot;&gt;&lt;/a&gt;
+    &lt;a href=&quot;https://badge.fury.io/py/Scrapling&quot; alt=&quot;PyPI version&quot;&gt;
+        &lt;img alt=&quot;PyPI version&quot; src=&quot;https://badge.fury.io/py/Scrapling.svg&quot;&gt;&lt;/a&gt;
+    &lt;a href=&quot;https://pepy.tech/project/scrapling&quot; alt=&quot;PyPI Downloads&quot;&gt;
+        &lt;img alt=&quot;PyPI Downloads&quot; src=&quot;https://static.pepy.tech/personalized-badge/scrapling?period=total&amp;units=INTERNATIONAL_SYSTEM&amp;left_color=GREY&amp;right_color=GREEN&amp;left_text=Downloads&quot;&gt;&lt;/a&gt;
+    &lt;a href=&quot;https://github.com/D4Vinci/Scrapling/tree/main/agent-skill&quot; alt=&quot;AI Agent Skill directory&quot;&gt;
+        &lt;img alt=&quot;Static Badge&quot; src=&quot;https://img.shields.io/badge/Skill-black?style=flat&amp;label=Agent&amp;link=https%3A%2F%2Fgithub.com%2FD4Vinci%2FScrapling%2Ftree%2Fmain%2Fagent-skill&quot;&gt;&lt;/a&gt;
+    &lt;a href=&quot;https://clawhub.ai/D4Vinci/scrapling-official&quot; alt=&quot;OpenClaw Skill&quot;&gt;
+        &lt;img alt=&quot;OpenClaw Skill&quot; src=&quot;https://img.shields.io/badge/Clawhub-darkred?style=flat&amp;label=OpenClaw&amp;link=https%3A%2F%2Fclawhub.ai%2FD4Vinci%2Fscrapling-official&quot;&gt;&lt;/a&gt;
+    &lt;br/&gt;
+    &lt;a href=&quot;https://discord.gg/EMgGbDceNQ&quot; alt=&quot;Discord&quot; target=&quot;_blank&quot;&gt;
+      &lt;img alt=&quot;Discord&quot; src=&quot;https://img.shields.io/discord/1360786381042880532?style=social&amp;logo=discord&amp;link=https%3A%2F%2Fdiscord.gg%2FEMgGbDceNQ&quot;&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://x.com/Scrapling_dev&quot; alt=&quot;X (formerly Twitter)&quot;&gt;
+      &lt;img alt=&quot;X (formerly Twitter) Follow&quot; src=&quot;https://img.shields.io/twitter/follow/Scrapling_dev?style=social&amp;logo=x&amp;link=https%3A%2F%2Fx.com%2FScrapling_dev&quot;&gt;
+    &lt;/a&gt;
+    &lt;br/&gt;
+    &lt;a href=&quot;https://pypi.org/project/scrapling/&quot; alt=&quot;Supported Python versions&quot;&gt;
+        &lt;img alt=&quot;Supported Python versions&quot; src=&quot;https://img.shields.io/pypi/pyversions/scrapling.svg&quot;&gt;&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;a href=&quot;https://scrapling.readthedocs.io/en/latest/parsing/selection/&quot;&gt;&lt;strong&gt;Selection methods&lt;/strong&gt;&lt;/a&gt;
+    &amp;middot;
+    &lt;a href=&quot;https://scrapling.readthedocs.io/en/latest/fetching/choosing/&quot;&gt;&lt;strong&gt;Fetchers&lt;/strong&gt;&lt;/a&gt;
+    &amp;middot;
+    &lt;a href=&quot;https://scrapling.readthedocs.io/en/latest/spiders/architecture.html&quot;&gt;&lt;strong&gt;Spiders&lt;/strong&gt;&lt;/a&gt;
+    &amp;middot;
+    &lt;a href=&quot;https://scrapling.readthedocs.io/en/latest/spiders/proxy-blocking.html&quot;&gt;&lt;strong&gt;Proxy Rotation&lt;/strong&gt;&lt;/a&gt;
+    &amp;middot;
+    &lt;a href=&quot;https://scrapling.readthedocs.io/en/latest/cli/overview/&quot;&gt;&lt;strong&gt;CLI&lt;/strong&gt;&lt;/a&gt;
+    &amp;middot;
+    &lt;a href=&quot;https://scrapling.readthedocs.io/en/latest/ai/mcp-server/&quot;&gt;&lt;strong&gt;MCP&lt;/strong&gt;&lt;/a&gt;
+&lt;/p&gt;
+
+Scrapling is an adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl.
+
+Its parser learns from website changes and automatically relocates your elements when pages update. Its fetchers bypass anti-bot systems like Cloudflare Turnstile out of the box. And its spider framework lets you scale up to concurrent, multi-session crawls with pause/resume and automatic proxy rotation — all in a few lines of Python. One library, zero compromises.
+
+Blazing fast crawls with real-time stats and streaming. Built by Web Scrapers for Web Scrapers and regular users, there&#x27;s something for everyone.
+
+```python
+from scrapling.fetchers import Fetcher, AsyncFetcher, StealthyFetcher, DynamicFetcher
+StealthyFetcher.adaptive = True
+p = StealthyFetcher.fetch(&#x27;https://example.com&#x27;, headless=True, network_idle=True)  # Fetch website under the radar!
+products = p.css(&#x27;.product&#x27;, auto_save=True)                                        # Scrape data that survives website design changes!
+products = p.css(&#x27;.product&#x27;, adaptive=True)                                         # Later, if the website structure changes, pass `adaptive=True` to find them!
+```
+Or scale up to full crawls
+```python
+from scrapling.spiders import Spider, Response
+
+class MySpider(Spider):
+  name = &quot;demo&quot;
+  start_urls = [&quot;https://example.com/&quot;]
+
+  async def parse(self, response: Response):
+      for item in response.css(&#x27;.product&#x27;):
+          yield {&quot;title&quot;: item.css(&#x27;h2::text&#x27;).get()}
+
+MySpider().start()
+```
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;a href=&quot;https://dataimpulse.com/?utm_source=scrapling&amp;utm_medium=banner&amp;utm_campaign=scrapling&quot; target=&quot;_blank&quot; style=&quot;display:flex; justify-content:center; padding:4px 0;&quot;&gt;
+        &lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/DataImpulse.png&quot; alt=&quot;At DataImpulse, we specialize in developing custom proxy services for your business. Make requests from anywhere, collect data, and enjoy fast connections with our premium proxies.&quot; style=&quot;max-height:60px;&quot;&gt;
+    &lt;/a&gt;
+&lt;/p&gt;
+
+# Platinum Sponsors
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td width=&quot;200&quot;&gt;
+      &lt;a href=&quot;https://hypersolutions.co/?utm_source=github&amp;utm_medium=readme&amp;utm_campaign=scrapling&quot; target=&quot;_blank&quot; title=&quot;Bot Protection Bypass API for Akamai, DataDome, Incapsula &amp; Kasada&quot;&gt;
+        &lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/HyperSolutions.png&quot;&gt;
+        &lt;br /&gt;
+      &lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt; Scrapling handles Cloudflare Turnstile. For enterprise-grade protection, &lt;a href=&quot;https://hypersolutions.co?utm_source=github&amp;utm_medium=readme&amp;utm_campaign=scrapling&quot;&gt;
+        &lt;b&gt;Hyper Solutions&lt;/b&gt;
+      &lt;/a&gt; provides API endpoints that generate valid antibot tokens for &lt;b&gt;Akamai&lt;/b&gt;, &lt;b&gt;DataDome&lt;/b&gt;, &lt;b&gt;Kasada&lt;/b&gt;, and &lt;b&gt;Incapsula&lt;/b&gt;. Simple API calls, no browser automation required. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td width=&quot;200&quot;&gt;
+      &lt;a href=&quot;https://birdproxies.com/t/scrapling&quot; target=&quot;_blank&quot; title=&quot;At Bird Proxies, we eliminate your pains such as banned IPs, geo restriction, and high costs so you can focus on your work.&quot;&gt;
+        &lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/BirdProxies.jpg&quot;&gt;
+        &lt;br /&gt;
+      &lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt;Hey, we built &lt;a href=&quot;https://birdproxies.com/t/scrapling&quot;&gt;
+        &lt;b&gt;BirdProxies&lt;/b&gt;
+      &lt;/a&gt; because proxies shouldn&#x27;t be complicated or overpriced. Fast residential and ISP proxies in 195+ locations, fair pricing, and real support. &lt;br /&gt;
+      &lt;b&gt;Try our FlappyBird game on the landing page for free data!&lt;/b&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td width=&quot;200&quot;&gt;
+      &lt;a href=&quot;https://evomi.com?utm_source=github&amp;utm_medium=banner&amp;utm_campaign=d4vinci-scrapling&quot; target=&quot;_blank&quot; title=&quot;Evomi is your Swiss Quality Proxy Provider, starting at $0.49/GB&quot;&gt;
+        &lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/evomi.png&quot;&gt;
+        &lt;br /&gt;
+      &lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;a href=&quot;https://evomi.com?utm_source=github&amp;utm_medium=banner&amp;utm_campaign=d4vinci-scrapling&quot;&gt;
+        &lt;b&gt;Evomi&lt;/b&gt;
+      &lt;/a&gt;: residential proxies from $0.49/GB. Scraping browser with fully spoofed Chromium, residential IPs, auto CAPTCHA solving, and anti-bot bypass. &lt;/br&gt;
+      &lt;b&gt;Scraper API for hassle-free results. MCP and N8N integrations are available.&lt;/b&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td width=&quot;200&quot;&gt;
+      &lt;a href=&quot;https://tikhub.io/?ref=KarimShoair&quot; target=&quot;_blank&quot; title=&quot;Unlock the Power of Social Media Data &amp; AI&quot;&gt;
+        &lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/TikHub.jpg&quot;&gt;
+        &lt;br /&gt;
+      &lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;a href=&quot;https://tikhub.io/?ref=KarimShoair&quot; target=&quot;_blank&quot;&gt;TikHub.io&lt;/a&gt; provides 900+ stable APIs across 16+ platforms including TikTok, X, YouTube &amp; Instagram, with 40M+ datasets. &lt;br /&gt; Also offers &lt;a href=&quot;https://ai.tikhub.io/?ref=KarimShoair&quot; target=&quot;_blank&quot;&gt;DISCOUNTED AI models&lt;/a&gt; — Claude, GPT, GEMINI &amp; more up to 71% off.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;i&gt;&lt;sub&gt;Do you want to show your ad here? Click [here](https://github.com/sponsors/D4Vinci/sponsorships?tier_id=586646)&lt;/sub&gt;&lt;/i&gt;
+# Sponsors 
+
+&lt;!-- sponsors --&gt;
+
+&lt;a href=&quot;https://serpapi.com/?utm_source=scrapling&quot; target=&quot;_blank&quot; title=&quot;Scrape Google and other search engines with SerpApi&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/SerpApi.png&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;https://visit.decodo.com/Dy6W0b&quot; target=&quot;_blank&quot; title=&quot;Try the Most Efficient Residential Proxies for Free&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/decodo.png&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;https://petrosky.io/d4vinci&quot; target=&quot;_blank&quot; title=&quot;PetroSky delivers cutting-edge VPS hosting.&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/petrosky.png&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;https://hasdata.com/?utm_source=github&amp;utm_medium=banner&amp;utm_campaign=D4Vinci&quot; target=&quot;_blank&quot; title=&quot;The web scraping service that actually beats anti-bot systems!&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/hasdata.png&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;https://proxyempire.io/?ref=scrapling&amp;utm_source=scrapling&quot; target=&quot;_blank&quot; title=&quot;Collect The Data Your Project Needs with the Best Residential Proxies&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/ProxyEmpire.png&quot;&gt;&lt;/a&gt;
+
+
+&lt;a href=&quot;https://www.swiftproxy.net/&quot; target=&quot;_blank&quot; title=&quot;Unlock Reliable Proxy Services with Swiftproxy!&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/swiftproxy.png&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;https://www.rapidproxy.io/?ref=d4v&quot; target=&quot;_blank&quot; title=&quot;Affordable Access to the Proxy World – bypass CAPTCHAs blocks, and avoid additional costs.&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/rapidproxy.jpg&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;https://browser.cash/?utm_source=D4Vinci&amp;utm_medium=referral&quot; target=&quot;_blank&quot; title=&quot;Browser Automation &amp; AI Browser Agent Platform&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/images/browserCash.png&quot;&gt;&lt;/a&gt;
+
+&lt;!-- /sponsors --&gt;
+
+&lt;i&gt;&lt;sub&gt;Do you want to show your ad here? Click [here](https://github.com/sponsors/D4Vinci) and choose the tier that suites you!&lt;/sub&gt;&lt;/i&gt;
+
+---
+
+## Key Features
+
+### Spiders — A Full Crawling Framework
+- 🕷️ **Scrapy-like Spider API**: Define spiders with `start_urls`, async `parse` callbacks, and `Request`/`Response` objects.
+- ⚡ **Concurrent Crawling**: Configurable concurrency limits, per-domain throttling, and download delays.
+- 🔄 **Multi-Session Support**: Unified interface for HTTP requests, and stealthy headless browsers in a single spider — route requests to different sessions by ID.
+- 💾 **Pause &amp; Resume**: Checkpoint-based crawl persistence. Press Ctrl+C for a graceful shutdown; restart to resume from where you left off.
+- 📡 **Streaming Mode**: Stream scraped items as they arrive via `async for item in spider.stream()` with real-time stats — ideal for UI, pipelines, and long-running crawls.
+- 🛡️ **Blocked Request Detection**: Automatic detection and retry of blocked requests with customizable logic.
+- 📦 **Built-in Export**: Export results through hooks and your own pipeline or the built-in JSON/JSONL with `result.items.to_json()` / `result.items.to_jsonl()` respectively.
+
+### Advanced Websites Fetching with Session Support
+- **HTTP Requests**: Fast and stealthy HTTP requests with the `Fetcher` class. Can impersonate browsers&#x27; TLS fingerprint, headers, and use HTTP/3.
+- **Dynamic Loading**: Fetch dynamic websites with full browser automation through the `DynamicFetcher` class supporting Playwright&#x27;s Chromium and Google&#x27;s Chrome.
+- **Anti-bot Bypass**: Advanced stealth capabilities with `StealthyFetcher` and fingerprint spoofing. Can easily bypass all types of Cloudflare&#x27;s Turnstile/Interstitial with automation.
+- **Session Management**: Persistent session support with `FetcherSession`, `StealthySession`, and `DynamicSession` classes for cookie and state management across requests.
+- **Proxy Rotation**: Built-in `ProxyRotator` with cyclic or custom rotation strategies across all session types, plus per-request proxy overrides.
+- **Domain Blocking**: Block requests to specific domains (and their subdomains) in browser-based fetchers.
+- **Async Support**: Complete async support across all fetchers and dedicated async session classes.
+
+### Adaptive Scraping &amp; AI Integration
+- 🔄 **Smart Element Tracking**: Relocate elements after website changes using intelligent similarity algorithms.
+- 🎯 **Smart Flexible Selection**: CSS selectors, XPath selectors, filter-based search, text search, regex search, and more.
+- 🔍 **Find Similar Elements**: Automatically locate elements similar to found elements.
+- 🤖 **MCP Server to be used with AI**: Built-in MCP server for AI-assisted Web Scraping and data extraction. The MCP server features powerful, custom capabilities that leverage Scrapling to extract targeted content before passing it to the AI (Claude/Cursor/etc), thereby speeding up operations and reducing costs by minimizing token usage. ([demo video](https://www.youtube.com/watch?v=qyFk3ZNwOxE))
+
+### High-Performance &amp; battle-tested Architecture
+- 🚀 **Lightning Fast**: Optimized performance outperforming most Python scraping libraries.
+- 🔋 **Memory Efficient**: Optimized data structures and lazy loading for a minimal memory footprint.
+- ⚡ **Fast JSON Serialization**: 10x faster than the standard library.
+- 🏗️ **Battle tested**: Not only does Scrapling have 92% test coverage and full type hints coverage, but it has been used daily by hundreds of Web Scrapers over the past year.
+
+### Developer/Web Scraper Friendly Experience
+- 🎯 **Interactive Web Scraping Shell**: Optional built-in IPython shell with Scrapling integration, shortcuts, and new tools to speed up Web Scraping scripts development, like converting curl requests to Scrapling requests and viewing requests results in your browser.
+- 🚀 **Use it directly from the Terminal**: Optionally, you can use Scrapling to scrape a URL without writing a single line of code!
+- 🛠️ **Rich Navigation API**: Advanced DOM traversal with parent, sibling, and child navigation methods.
+- 🧬 **Enhanced Text Processing**: Built-in regex, cleaning methods, and optimized string operations.
+</code></pre></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="1fxfVN" prefix="r8" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;thinking_level_change&quot;],&quot;icon&quot;:[0,&quot;🧠&quot;],&quot;label&quot;:[0,&quot;Thinking&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;This is a very comprehensive web scraping framework. Let me also check the main source code structure to understand the architecture better.&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:19:34.176000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:19:34">22:19</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🧠</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Thinking</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p>This is a very comprehensive web scraping framework. Let me also check the main source code structure to understand the architecture better.</p></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="13tsbR" prefix="r9" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;custom&quot;],&quot;icon&quot;:[0,&quot;🔧&quot;],&quot;label&quot;:[0,&quot;Tool Call - exec&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;**Command**:\n```\ncurl -sL \&quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling\&quot; | jq -r &#39;.[] | .name&#39;\n```\n\n***\n\n```\n__init__.py\ncli.py\ncore\nengines\nfetchers\nparser.py\npy.typed\nspiders\n```&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:19:34.176000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:19:34">22:19</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🔧</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Tool Call - exec</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p><strong>Command</strong>:</p>
+<pre><code node="[object Object]">curl -sL &quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling&quot; | jq -r &#x27;.[] | .name&#x27;
+</code></pre>
+<hr/>
+<pre><code node="[object Object]">__init__.py
+cli.py
+core
+engines
+fetchers
+parser.py
+py.typed
+spiders
+</code></pre></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="ZWSOi1" prefix="r10" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;thinking_level_change&quot;],&quot;icon&quot;:[0,&quot;🧠&quot;],&quot;label&quot;:[0,&quot;Thinking&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;Let me get more details about the core modules.&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:19:49.100000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:19:49">22:19</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🧠</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Thinking</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p>Let me get more details about the core modules.</p></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Z10UTDR" prefix="r11" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;custom&quot;],&quot;icon&quot;:[0,&quot;🔧&quot;],&quot;label&quot;:[0,&quot;Tool Call - exec&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;**Command**:\n```\ncurl -sL \&quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/fetchers\&quot; | jq -r &#39;.[] | .name&#39; &amp;&amp; echo \&quot;---\&quot; &amp;&amp; curl -sL \&quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/spiders\&quot; | jq -r &#39;.[] | .name&#39;\n```\n\n***\n\n```\nCommand still running (session ember-lobster, pid 579553). Use process (list/poll/log/write/kill/clear/remove) for follow-up.\n```&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:19:49.100000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:19:49">22:19</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🔧</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Tool Call - exec</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p><strong>Command</strong>:</p>
+<pre><code node="[object Object]">curl -sL &quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/fetchers&quot; | jq -r &#x27;.[] | .name&#x27; &amp;&amp; echo &quot;---&quot; &amp;&amp; curl -sL &quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/spiders&quot; | jq -r &#x27;.[] | .name&#x27;
+</code></pre>
+<hr/>
+<pre><code node="[object Object]">Command still running (session ember-lobster, pid 579553). Use process (list/poll/log/write/kill/clear/remove) for follow-up.
+</code></pre></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Ga0cM" prefix="r12" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;thinking_level_change&quot;],&quot;icon&quot;:[0,&quot;🧠&quot;],&quot;label&quot;:[0,&quot;Thinking&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;Let me wait for the result or try again.&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:20:01.589000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:20:01">22:20</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🧠</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Thinking</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p>Let me wait for the result or try again.</p></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Z2qzkQe" prefix="r13" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;custom&quot;],&quot;icon&quot;:[0,&quot;🔧&quot;],&quot;label&quot;:[0,&quot;Tool Call - process&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;```\n---\n\n\nProcess exited with code 0.\n```&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:20:01.589000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:20:01">22:20</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🔧</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Tool Call - process</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><pre><code node="[object Object]">---
+
+
+Process exited with code 0.
+</code></pre></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="2k7Bjw" prefix="r14" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;thinking_level_change&quot;],&quot;icon&quot;:[0,&quot;🧠&quot;],&quot;label&quot;:[0,&quot;Thinking&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;Let me try again to get the module structure.&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:20:04.269000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:20:04">22:20</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🧠</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Thinking</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p>Let me try again to get the module structure.</p></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Z2sS5cv" prefix="r15" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;custom&quot;],&quot;icon&quot;:[0,&quot;🔧&quot;],&quot;label&quot;:[0,&quot;Tool Call - exec&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;**Command**:\n```\ncurl -sL \&quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/fetchers\&quot; 2&gt;/dev/null | jq -r &#39;.[] .name&#39; &amp;&amp; echo \&quot;---spiders---\&quot; &amp;&amp; curl -sL \&quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/spiders\&quot; 2&gt;/dev/null | jq -r &#39;.[] .name&#39;\n```\n\n***\n\n```\n__init__.py\nchrome.py\nrequests.py\nstealth_chrome.py\n---spiders---\n__init__.py\ncheckpoint.py\nengine.py\nrequest.py\nresult.py\nscheduler.py\nsession.py\nspider.py\n```&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:20:04.269000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:20:04">22:20</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🔧</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Tool Call - exec</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p><strong>Command</strong>:</p>
+<pre><code node="[object Object]">curl -sL &quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/fetchers&quot; 2&gt;/dev/null | jq -r &#x27;.[] .name&#x27; &amp;&amp; echo &quot;---spiders---&quot; &amp;&amp; curl -sL &quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/scrapling/spiders&quot; 2&gt;/dev/null | jq -r &#x27;.[] .name&#x27;
+</code></pre>
+<hr/>
+<pre><code node="[object Object]">__init__.py
+chrome.py
+requests.py
+stealth_chrome.py
+---spiders---
+__init__.py
+checkpoint.py
+engine.py
+request.py
+result.py
+scheduler.py
+session.py
+spider.py
+</code></pre></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Z1DzeMy" prefix="r16" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;thinking_level_change&quot;],&quot;icon&quot;:[0,&quot;🧠&quot;],&quot;label&quot;:[0,&quot;Thinking&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;Now I have enough information to provide a deep analysis. Let me also check if there&#39;s an MCP server component.&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:20:09.672000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:20:09">22:20</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🧠</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Thinking</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p>Now I have enough information to provide a deep analysis. Let me also check if there&#x27;s an MCP server component.</p></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Z14ABE0" prefix="r17" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;custom&quot;],&quot;icon&quot;:[0,&quot;🔧&quot;],&quot;label&quot;:[0,&quot;Tool Call - exec&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;**Command**:\n```\ncurl -sL \&quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/server.json\&quot; | jq -r &#39;.content&#39; | base64 -d 2&gt;/dev/null | head -50\n```\n\n***\n\n```\n{\n  \&quot;$schema\&quot;: \&quot;https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json\&quot;,\n  \&quot;name\&quot;: \&quot;io.github.D4Vinci/Scrapling\&quot;,\n  \&quot;title\&quot;: \&quot;Scrapling MCP Server\&quot;,\n  \&quot;description\&quot;: \&quot;Web scraping with stealth HTTP, real browsers, and Cloudflare bypass. CSS selectors supported.\&quot;,\n  \&quot;websiteUrl\&quot;: \&quot;https://scrapling.readthedocs.io/en/latest/ai/mcp-server.html\&quot;,\n  \&quot;repository\&quot;: {\n    \&quot;url\&quot;: \&quot;https://github.com/D4Vinci/Scrapling\&quot;,\n    \&quot;source\&quot;: \&quot;github\&quot;\n  },\n  \&quot;icons\&quot;: [\n    {\n      \&quot;src\&quot;: \&quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/docs/assets/logo.png\&quot;,\n      \&quot;mimeType\&quot;: \&quot;image/png\&quot;\n    }\n  ],\n  \&quot;version\&quot;: \&quot;0.4.2\&quot;,\n  \&quot;packages\&quot;: [\n    {\n      \&quot;registryType\&quot;: \&quot;pypi\&quot;,\n      \&quot;identifier\&quot;: \&quot;scrapling\&quot;,\n      \&quot;version\&quot;: \&quot;0.4.2\&quot;,\n      \&quot;runtimeHint\&quot;: \&quot;uvx\&quot;,\n      \&quot;packageArguments\&quot;: [\n        {\n          \&quot;type\&quot;: \&quot;positional\&quot;,\n          \&quot;valueHint\&quot;: \&quot;mcp\&quot;,\n          \&quot;isFixed\&quot;: true\n        }\n      ],\n      \&quot;transport\&quot;: {\n        \&quot;type\&quot;: \&quot;stdio\&quot;\n      }\n    },\n    {\n      \&quot;registryType\&quot;: \&quot;oci\&quot;,\n      \&quot;identifier\&quot;: \&quot;ghcr.io/d4vinci/scrapling\&quot;,\n      \&quot;packageArguments\&quot;: [\n        {\n          \&quot;type\&quot;: \&quot;positional\&quot;,\n          \&quot;valueHint\&quot;: \&quot;mcp\&quot;,\n          \&quot;isFixed\&quot;: true\n        }\n      ],\n      \&quot;transport\&quot;: {\n        \&quot;type\&quot;: \&quot;stdio\&quot;\n      }\n    }\n  ]\n}\n```&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:20:09.672000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:20:09">22:20</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🔧</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Tool Call - exec</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p><strong>Command</strong>:</p>
+<pre><code node="[object Object]">curl -sL &quot;https://api.github.com/repos/D4Vinci/Scrapling/contents/server.json&quot; | jq -r &#x27;.content&#x27; | base64 -d 2&gt;/dev/null | head -50
+</code></pre>
+<hr/>
+<pre><code node="[object Object]">{
+  &quot;$schema&quot;: &quot;https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json&quot;,
+  &quot;name&quot;: &quot;io.github.D4Vinci/Scrapling&quot;,
+  &quot;title&quot;: &quot;Scrapling MCP Server&quot;,
+  &quot;description&quot;: &quot;Web scraping with stealth HTTP, real browsers, and Cloudflare bypass. CSS selectors supported.&quot;,
+  &quot;websiteUrl&quot;: &quot;https://scrapling.readthedocs.io/en/latest/ai/mcp-server.html&quot;,
+  &quot;repository&quot;: {
+    &quot;url&quot;: &quot;https://github.com/D4Vinci/Scrapling&quot;,
+    &quot;source&quot;: &quot;github&quot;
+  },
+  &quot;icons&quot;: [
+    {
+      &quot;src&quot;: &quot;https://raw.githubusercontent.com/D4Vinci/Scrapling/main/docs/assets/logo.png&quot;,
+      &quot;mimeType&quot;: &quot;image/png&quot;
+    }
+  ],
+  &quot;version&quot;: &quot;0.4.2&quot;,
+  &quot;packages&quot;: [
+    {
+      &quot;registryType&quot;: &quot;pypi&quot;,
+      &quot;identifier&quot;: &quot;scrapling&quot;,
+      &quot;version&quot;: &quot;0.4.2&quot;,
+      &quot;runtimeHint&quot;: &quot;uvx&quot;,
+      &quot;packageArguments&quot;: [
+        {
+          &quot;type&quot;: &quot;positional&quot;,
+          &quot;valueHint&quot;: &quot;mcp&quot;,
+          &quot;isFixed&quot;: true
+        }
+      ],
+      &quot;transport&quot;: {
+        &quot;type&quot;: &quot;stdio&quot;
+      }
+    },
+    {
+      &quot;registryType&quot;: &quot;oci&quot;,
+      &quot;identifier&quot;: &quot;ghcr.io/d4vinci/scrapling&quot;,
+      &quot;packageArguments&quot;: [
+        {
+          &quot;type&quot;: &quot;positional&quot;,
+          &quot;valueHint&quot;: &quot;mcp&quot;,
+          &quot;isFixed&quot;: true
+        }
+      ],
+      &quot;transport&quot;: {
+        &quot;type&quot;: &quot;stdio&quot;
+      }
+    }
+  ]
+}
+</code></pre></div></div></div></div></div></article><!--astro:end--></astro-island><astro-island uid="Z1znEBc" prefix="r18" component-url="/_astro/CollapsibleMessage.BBeZb37o.js" component-export="CollapsibleMessage" renderer-url="/_astro/client.Dc9Vh3na.js" props="{&quot;type&quot;:[0,&quot;thinking_level_change&quot;],&quot;icon&quot;:[0,&quot;🧠&quot;],&quot;label&quot;:[0,&quot;Thinking&quot;],&quot;collapsed&quot;:[0,false],&quot;content&quot;:[0,&quot;Now I have a comprehensive understanding of Scrapling. Let me provide a detailed analysis following the required output structure.&quot;],&quot;author&quot;:[0,&quot;y4sol&quot;],&quot;timestamp&quot;:[0,&quot;2026-03-10 14:20:52.969000+00:00&quot;],&quot;isFirstInGroup&quot;:[0,false],&quot;isLastInGroup&quot;:[0,false],&quot;avatarColorIndex&quot;:[0]}" ssr client="visible" opts="{&quot;name&quot;:&quot;CollapsibleMessage&quot;,&quot;value&quot;:true}" await-children><article data-author="y4sol" data-collapsible="true" class="CollapsibleMessage-module__collapsible___X-Dye CollapsibleMessage-module__collapsibleNotLastInGroup___WLclg CollapsibleMessage-module__collapsibleNotFirstInGroup___qkylg"><div class="CollapsibleMessage-module__messageHeader___7F9by CollapsibleMessage-module__hiddenHeader___bMR-5" data-header="true"><div class="CollapsibleMessage-module__avatar___tSk7A CollapsibleMessage-module__avatarHuman___DYDnx">Y</div><span class="CollapsibleMessage-module__authorName___q-8km">y4sol</span><span class="CollapsibleMessage-module__authorTimestamp___kKMjo" title="2026-03-10 22:20:52">22:20</span></div><div class="CollapsibleMessage-module__collapsibleWrapper___S65nO"><div class="CollapsibleMessage-module__collapsibleBorder___VT6hD"><button type="button" class="CollapsibleMessage-module__collapsibleToggle___FCXZI" aria-disabled="false"><span class="CollapsibleMessage-module__collapsibleTypeIcon___gYtM9">🧠</span><span class="CollapsibleMessage-module__collapsibleTypeLabel___PsW6I">Thinking</span><span class="CollapsibleMessage-module__chevronWrapper___dfian"><svg class="CollapsibleMessage-module__chevron___okkH- CollapsibleMessage-module__chevronOpen___WrYhI" fill="none" viewBox="0 0 24 24" stroke="currentColor" role="img" aria-label="Collapse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path></svg></span></button><div class="CollapsibleMessage-module__collapsibleContent___VvTTQ CollapsibleMessage-module__collapsibleContentOpen___8qZGf"><div class="CollapsibleMessage-module__collapsibleBody___mx37e"><div class="CollapsibleMessage-module__collapsibleBodyInner___G47hA prose"><p>Now I have a comprehensive understanding of Scrapling. Let me provide a detailed analysis following the required output structure.</p></div></div></div></div></div></article><!--astro:end--></astro-island><article class="chat-message last-in-group not-first-in-group" data-author="y4sol" data-astro-cid-lf3k52wd> <div class="message-header hidden-header" data-header="true" data-astro-cid-qgtp6nvi><div class="avatar avatar-human" data-astro-cid-qgtp6nvi>Y</div><span class="author-name" data-astro-cid-qgtp6nvi>y4sol</span><span class="author-timestamp" title="2026-03-10 22:20:52" data-astro-cid-qgtp6nvi>22:20</span></div> <div class="message-body body-agent" data-astro-cid-lf3k52wd> <!-- set:html content is trusted (session logs); :global() selectors below
+         target the injected elements that won't carry Astro's scoping attr. --> <div class="message-content prose" data-astro-cid-lf3k52wd><h1>🕷️ Scrapling 深度分析</h1>
+<h2>1. 核心定位</h2>
+<p><strong>自适应 Web Scraping 框架</strong> — 从单次请求到全规模爬取一体化解决方案。</p>
+<ul>
+<li><strong>类型</strong>: 企业级爬虫框架</li>
+<li><strong>特点</strong>: 智能页面变化适应 + 反爬虫绕过 + 完整爬虫架构</li>
+<li><strong>⭐ 评分</strong>: ⭐⭐⭐⭐⭐ (27.9k Stars, 2k+ Forks)</li>
+</ul>
+<hr>
+<h2>2. 架构 (文本流程图)</h2>
+<pre class="shiki vitesse-dark" style="background-color:#121212;color:#dbd7caee" tabindex="0"><code><span class="line"><span>用户代码</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>┌─────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│                    Scrapling 框架                        │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │</span></span>
+<span class="line"><span>│  │   Fetcher   │  │   Spider    │  │    MCP      │    │</span></span>
+<span class="line"><span>│  │  (HTTP)     │  │  (爬虫)      │  │  Server     │    │</span></span>
+<span class="line"><span>│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘    │</span></span>
+<span class="line"><span>│         │                │                │             │</span></span>
+<span class="line"><span>│  ┌──────┴──────┐  ┌──────┴──────┐         │             │</span></span>
+<span class="line"><span>│  │ Stealthy    │  │  Scheduler  │         │             │</span></span>
+<span class="line"><span>│  │ Dynamic     │  │  Engine     │         │             │</span></span>
+<span class="line"><span>│  └──────┬──────┘  └──────┬──────┘         │             │</span></span>
+<span class="line"><span>│         │                │                │             │</span></span>
+<span class="line"><span>│  ┌──────┴────────────────┴────────────────┴──────┐      │</span></span>
+<span class="line"><span>│  │              Parser (自适应解析器)               │      │</span></span>
+<span class="line"><span>│  │    • CSS/XPath 选择器                          │      │</span></span>
+<span class="line"><span>│  │    • 智能元素追踪 (页面变化适应)                  │      │</span></span>
+<span class="line"><span>│  │    • 相似元素查找                               │      │</span></span>
+<span class="line"><span>│  └───────────────────────────────────────────────┘      │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────────┘</span></span>
+<span class="line"><span>         ↓              ↓              ↓</span></span>
+<span class="line"><span>   HTTP/3 请求    Playwright     AI Agent</span></span>
+<span class="line"><span>   TLS指纹伪装   浏览器自动化    (Claude/Cursor)</span></span></code></pre>
+<hr>
+<h2>3. 技术栈</h2>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>技术</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HTTP 请求</strong></td>
+<td><code>requests</code> + TLS 指纹伪装 + HTTP/3</td>
+</tr>
+<tr>
+<td><strong>浏览器</strong></td>
+<td>Playwright (Chromium) + Chrome</td>
+</tr>
+<tr>
+<td><strong>反爬绕过</strong></td>
+<td>Cloudflare Turnstile/Interstitial</td>
+</tr>
+<tr>
+<td><strong>异步</strong></td>
+<td><code>asyncio</code></td>
+</tr>
+<tr>
+<td><strong>代理轮换</strong></td>
+<td>内置 <code>ProxyRotator</code></td>
+</tr>
+<tr>
+<td><strong>AI 集成</strong></td>
+<td>MCP Server (Claude/Cursor)</td>
+</tr>
+<tr>
+<td><strong>爬虫架构</strong></td>
+<td>类 Scrapy 设计</td>
+</tr>
+<tr>
+<td><strong>序列化</strong></td>
+<td>自研 Fast JSON (比标准库快 10x)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>4. 使用方式</h2>
+<h3>快速开始 (单次请求)</h3>
+<pre class="shiki vitesse-dark" style="background-color:#121212;color:#dbd7caee" tabindex="0"><code><span class="line"><span style="color:#4D9375">from</span><span style="color:#DBD7CAEE"> scrapling</span><span style="color:#666666">.</span><span style="color:#DBD7CAEE">fetchers </span><span style="color:#4D9375">import</span><span style="color:#DBD7CAEE"> StealthyFetcher</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#758575DD"># 绕过 Cloudflare + 自动元素追踪</span></span>
+<span class="line"><span style="color:#DBD7CAEE">StealthyFetcher</span><span style="color:#666666">.</span><span style="color:#DBD7CAEE">adaptive </span><span style="color:#666666">=</span><span style="color:#4D9375"> True</span></span>
+<span class="line"><span style="color:#DBD7CAEE">p </span><span style="color:#666666">=</span><span style="color:#DBD7CAEE"> StealthyFetcher</span><span style="color:#666666">.</span><span style="color:#DBD7CAEE">fetch</span><span style="color:#666666">(</span><span style="color:#C98A7D77">'</span><span style="color:#C98A7D">https://example.com</span><span style="color:#C98A7D77">'</span><span style="color:#666666">,</span><span style="color:#BD976A"> headless</span><span style="color:#666666">=</span><span style="color:#4D9375">True</span><span style="color:#666666">,</span><span style="color:#BD976A"> network_idle</span><span style="color:#666666">=</span><span style="color:#4D9375">True</span><span style="color:#666666">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#758575DD"># 自适应选择器 - 网站改版也能找到</span></span>
+<span class="line"><span style="color:#DBD7CAEE">products </span><span style="color:#666666">=</span><span style="color:#DBD7CAEE"> p</span><span style="color:#666666">.</span><span style="color:#DBD7CAEE">css</span><span style="color:#666666">(</span><span style="color:#C98A7D77">'</span><span style="color:#C98A7D">.product</span><span style="color:#C98A7D77">'</span><span style="color:#666666">,</span><span style="color:#BD976A"> adaptive</span><span style="color:#666666">=</span><span style="color:#4D9375">True</span><span style="color:#666666">)</span></span></code></pre>
+<h3>完整爬虫</h3>
+<pre class="shiki vitesse-dark" style="background-color:#121212;color:#dbd7caee" tabindex="0"><code><span class="line"><span style="color:#4D9375">from</span><span style="color:#DBD7CAEE"> scrapling</span><span style="color:#666666">.</span><span style="color:#DBD7CAEE">spiders </span><span style="color:#4D9375">import</span><span style="color:#DBD7CAEE"> Spider</span><span style="color:#666666">,</span><span style="color:#DBD7CAEE"> Response</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CB7676">class</span><span style="color:#5DA994"> MySpider</span><span style="color:#666666">(</span><span style="color:#80A665">Spider</span><span style="color:#666666">):</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    name </span><span style="color:#666666">=</span><span style="color:#C98A7D77"> "</span><span style="color:#C98A7D">demo</span><span style="color:#C98A7D77">"</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    start_urls </span><span style="color:#666666">=</span><span style="color:#666666"> [</span><span style="color:#C98A7D77">"</span><span style="color:#C98A7D">https://example.com/</span><span style="color:#C98A7D77">"</span><span style="color:#666666">]</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span></span>
+<span class="line"><span style="color:#CB7676">    async</span><span style="color:#CB7676"> def</span><span style="color:#80A665"> parse</span><span style="color:#666666">(</span><span style="color:#DBD7CAEE">self</span><span style="color:#666666">,</span><span style="color:#DBD7CAEE"> response</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> Response</span><span style="color:#666666">):</span></span>
+<span class="line"><span style="color:#4D9375">        for</span><span style="color:#DBD7CAEE"> item </span><span style="color:#4D9375">in</span><span style="color:#DBD7CAEE"> response</span><span style="color:#666666">.</span><span style="color:#DBD7CAEE">css</span><span style="color:#666666">(</span><span style="color:#C98A7D77">'</span><span style="color:#C98A7D">.product</span><span style="color:#C98A7D77">'</span><span style="color:#666666">):</span></span>
+<span class="line"><span style="color:#4D9375">            yield</span><span style="color:#666666"> {</span><span style="color:#C98A7D77">"</span><span style="color:#C98A7D">title</span><span style="color:#C98A7D77">"</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> item</span><span style="color:#666666">.</span><span style="color:#DBD7CAEE">css</span><span style="color:#666666">(</span><span style="color:#C98A7D77">'</span><span style="color:#C98A7D">h2::text</span><span style="color:#C98A7D77">'</span><span style="color:#666666">).</span><span style="color:#DBD7CAEE">get</span><span style="color:#666666">()}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#758575DD"># 启动爬虫 (支持流式输出、暂停恢复)</span></span>
+<span class="line"><span style="color:#DBD7CAEE">MySpider</span><span style="color:#666666">().</span><span style="color:#DBD7CAEE">start</span><span style="color:#666666">()</span></span></code></pre>
+<h3>CLI 用法</h3>
+<pre class="shiki vitesse-dark" style="background-color:#121212;color:#dbd7caee" tabindex="0"><code><span class="line"><span style="color:#758575DD"># 无需写代码，直接命令行爬取</span></span>
+<span class="line"><span style="color:#80A665">scrapling</span><span style="color:#C98A7D"> https://example.com</span><span style="color:#C99076"> -s</span><span style="color:#C98A7D77"> "</span><span style="color:#C98A7D">.title::text</span><span style="color:#C98A7D77">"</span></span></code></pre>
+<h3>MCP Server (AI Agent 用)</h3>
+<pre class="shiki vitesse-dark" style="background-color:#121212;color:#dbd7caee" tabindex="0"><code><span class="line"><span style="color:#758575DD"># 启动 MCP Server</span></span>
+<span class="line"><span style="color:#80A665">uvx</span><span style="color:#C98A7D"> scrapling</span><span style="color:#C98A7D"> mcp</span></span></code></pre>
+<hr>
+<h2>5. 核心机制</h2>
+<h3>🔄 自适应解析 (Adaptive Parsing)</h3>
+<ul>
+<li><strong>智能元素追踪</strong>: 记录元素特征 (文本、结构、位置)</li>
+<li><strong>页面变化适应</strong>: 网站改版后自动重新定位元素</li>
+<li><strong>相似元素查找</strong>: 找到的元素可用于发现更多相似元素</li>
+</ul>
+<h3>🛡️ 反爬虫绕过</h3>
+<ul>
+<li><strong>TLS 指纹</strong>: 模拟真实浏览器 TLS 握手</li>
+<li><strong>Header 伪装</strong>: 自动生成真实浏览器 Header</li>
+<li><strong>Cloudflare Turnstile</strong>: 内置绕过 (无需手动解验证码)</li>
+<li><strong>Playwright 浏览器</strong>: 完全自动化浏览器指纹</li>
+</ul>
+<h3>🕷️ 爬虫框架</h3>
+<ul>
+<li><strong>并发控制</strong>: 可配置并发数、域名限速、下载延迟</li>
+<li><strong>多会话</strong>: 统一接口管理 HTTP + 浏览器会话</li>
+<li><strong>暂停/恢复</strong>: Checkpoint 机制，Ctrl+C 优雅关机</li>
+<li><strong>流式输出</strong>: <code>async for item in spider.stream()</code> 实时推送</li>
+</ul>
+<h3>🔀 代理轮换</h3>
+<ul>
+<li>内置 <code>ProxyRotator</code> </li>
+<li>支持循环/自定义策略</li>
+<li>支持单请求代理覆盖</li>
+</ul>
+<hr>
+<h2>6. 外部集成</h2>
+<table>
+<thead>
+<tr>
+<th>集成</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MCP Server</strong></td>
+<td>AI Agent (Claude/Cursor) 调用</td>
+</tr>
+<tr>
+<td><strong>Playwright</strong></td>
+<td>动态页面渲染</td>
+</tr>
+<tr>
+<td><strong>代理服务商</strong></td>
+<td>DataImpulse, BirdProxies, Evomi, Decodo</td>
+</tr>
+<tr>
+<td><strong>反爬 API</strong></td>
+<td>Hyper Solutions (Akamai/DataDome/Kasada)</td>
+</tr>
+<tr>
+<td><strong>CLI</strong></td>
+<td>终端直接爬取</td>
+</tr>
+<tr>
+<td><strong>IPython Shell</strong></td>
+<td>交互式调试 + curl 转代码</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>7. 优缺点对比</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>易用性</strong></td>
+<td>API 简洁，文档丰富</td>
+<td>功能太多，学习曲线略陡</td>
+</tr>
+<tr>
+<td><strong>反爬能力</strong></td>
+<td>开箱即用 Cloudflare 绕过</td>
+<td>复杂反爬仍需企业级方案</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>Fast JSON 快 10x，内存优化</td>
+<td>大量并发仍需优化</td>
+</tr>
+<tr>
+<td><strong>稳定性</strong></td>
+<td>92% 测试覆盖，类型提示完整</td>
+<td>依赖 Playwright，体积较大</td>
+</tr>
+<tr>
+<td><strong>扩展性</strong></td>
+<td>MCP + Spider Hooks 丰富</td>
+<td>插件生态较弱</td>
+</tr>
+<tr>
+<td><strong>社区</strong></td>
+<td>27k Stars，活跃开发</td>
+<td>中文资料较少</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>8. 对比同类工具</h2>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>类型</th>
+<th>反爬</th>
+<th>难度</th>
+<th>适合场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Scrapling</strong></td>
+<td>框架</td>
+<td>⭐⭐⭐⭐</td>
+<td>中</td>
+<td>企业级爬虫 + AI 集成</td>
+</tr>
+<tr>
+<td><strong>Playwright</strong></td>
+<td>工具库</td>
+<td>⭐⭐</td>
+<td>低</td>
+<td>简单动态页面</td>
+</tr>
+<tr>
+<td><strong>Scrapy</strong></td>
+<td>框架</td>
+<td>⭐⭐</td>
+<td>高</td>
+<td>大型爬虫项目</td>
+</tr>
+<tr>
+<td><strong>Selenium</strong></td>
+<td>工具库</td>
+<td>⭐</td>
+<td>低</td>
+<td>简单自动化测试</td>
+</tr>
+<tr>
+<td><strong>Puppeteer</strong></td>
+<td>工具库</td>
+<td>⭐⭐</td>
+<td>中</td>
+<td>Node.js 项目</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>总结</h2>
+<p>Scrapling 是一个 <strong>功能完备的企业级爬虫框架</strong>，核心亮点：</p>
+<ol>
+<li><strong>自适应解析</strong> — 解决网站改版痛点</li>
+<li><strong>开箱即用的反爬</strong> — Cloudflare Turnstile 绕过</li>
+<li><strong>完整爬虫架构</strong> — 暂停恢复、流式输出、代理轮换</li>
+<li><strong>AI 集成</strong> — MCP Server 支持 Claude/Cursor</li>
+</ol>
+<p>适合需要 <strong>稳定爬取 + 长期维护</strong> 的项目。复杂度高于 Playwright，但长期维护成本更低。</p>
+</div> </div> </article> <article class="chat-message last-in-group" data-author="Z3R0" data-astro-cid-lf3k52wd> <div class="message-header" data-header="true" data-astro-cid-qgtp6nvi><div class="avatar avatar-human" style="background-color: #3b4a5a; color: #e8eaed" data-astro-cid-qgtp6nvi>Z</div><span class="author-name" data-astro-cid-qgtp6nvi>Z3R0</span><span class="author-timestamp" title="2026-03-10 22:39:05" data-astro-cid-qgtp6nvi>22:39</span></div> <div class="message-body body-human" data-astro-cid-lf3k52wd> <!-- set:html content is trusted (session logs); :global() selectors below
+         target the injected elements that won't carry Astro's scoping attr. --> <div class="message-content prose" data-astro-cid-lf3k52wd><p>记到笔记</p>
+</div> </div> </article> <article class="chat-message last-in-group" data-author="y4sol" data-astro-cid-lf3k52wd> <div class="message-header" data-header="true" data-astro-cid-qgtp6nvi><div class="avatar avatar-human" data-astro-cid-qgtp6nvi>Y</div><span class="author-name" data-astro-cid-qgtp6nvi>y4sol</span><span class="author-timestamp" title="2026-03-10 22:40:05" data-astro-cid-qgtp6nvi>22:40</span></div> <div class="message-body body-agent" data-astro-cid-lf3k52wd> <!-- set:html content is trusted (session logs); :global() selectors below
+         target the injected elements that won't carry Astro's scoping attr. --> <div class="message-content prose" data-astro-cid-lf3k52wd><p>✅ 已保存到 <code>notes/research/2026-03-10-Scrapling分析.md</code></p>
+</div> </div> </article>  </main> <footer class="layout-footer" data-astro-cid-sz7xmlte> <p class="layout-footer-text" data-astro-cid-sz7xmlte>
+// generated by <a href="https://github.com/imyelo/openclaw-chats-share" class="layout-footer-link" data-astro-cid-sz7xmlte>chats-share</a> <span data-astro-cid-sz7xmlte>@ v0.7.2</span>  </p> </footer>  </div> <script type="module">const o=document.getElementById("page-nav"),e=document.getElementById("nav-title"),t=document.getElementById("page-title");e&&t&&(e.textContent=t.textContent,new IntersectionObserver(([s])=>{const n=!s.isIntersecting;e.classList.toggle("visible",n),o?.classList.toggle("scrolled",n)},{threshold:0}).observe(t));</script> </body> </html>

@@ -1,0 +1,10 @@
+# Cloudflare Pages 配置
+
+## 构建命令
+bun run build
+
+## 输出目录
+dist
+
+## Node 版本
+18

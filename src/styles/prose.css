@@ -1,0 +1,247 @@
+/*
+ * Shared prose typography
+ *
+ * Applied via the `.prose` class. Imported (as a global stylesheet) by
+ * ChatMessage.astro and CollapsibleMessage.tsx.  All values reference tokens
+ * from tokens.css — never hard-code colours here.
+ */
+
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  font-family: var(--font-serif);
+  color: var(--text-primary);
+}
+
+.prose h1 { font-size: 1.5em; }
+.prose h2 { font-size: 1.25em; }
+.prose h3 { font-size: 1.1em; }
+
+.prose p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  color: var(--text-prose);
+}
+
+.prose :is(ul, ol) {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 1.5em;
+  color: var(--text-prose);
+}
+
+.prose li {
+  margin-top: 0.375em;
+  margin-bottom: 0.375em;
+  color: var(--text-prose);
+}
+
+.prose :is(strong, b) {
+  color: var(--text-bold);
+  font-weight: 700;
+}
+
+.prose a {
+  color: var(--accent);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.prose a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.prose code {
+  color: var(--accent);
+  background: var(--bg-tertiary);
+  padding: 0.125em 0.375em;
+  border-radius: 2px;
+  font-size: 0.875em;
+  font-family: var(--font-mono);
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+.prose pre {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* shiki wraps output in <pre class="shiki"> — keep design consistent */
+.prose pre.shiki {
+  background-color: var(--bg-secondary) !important;
+}
+
+.prose pre::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.prose pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.prose pre::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.prose pre::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: var(--text-primary);
+  font-size: 0.875em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.prose blockquote {
+  margin: 1em 0;
+  padding: 0.75em 1em;
+  border-left: 3px solid var(--accent);
+  color: var(--text-secondary);
+  font-style: normal;
+  background: var(--bg-secondary);
+  border-radius: 0 4px 4px 0;
+}
+
+.prose blockquote p:first-of-type { margin-top: 0; }
+.prose blockquote p:last-of-type  { margin-bottom: 0; }
+
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5em 0;
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.875em;
+  white-space: nowrap;
+}
+
+.prose :is(th, td) {
+  border: 1px solid var(--border);
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+.prose th {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.prose td {
+  color: var(--text-td);
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+/* ── Redacted content (TV-static noise animation) ──────────────── */
+
+.redacted-inline {
+  display: inline-block;
+  position: relative;
+  min-width: 6.5em;
+  height: 1.4em;
+  vertical-align: middle;
+  border-radius: 3px;
+  border: 1px solid var(--redacted-border);
+  background: var(--redacted-bg);
+  overflow: hidden;
+  cursor: default;
+  user-select: none;
+  box-shadow: 0 0 8px var(--redacted-glow);
+}
+
+/* Scanline overlay */
+.redacted-inline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.18) 2px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Fractal noise texture, animated background-position for the static effect */
+.redacted-noise {
+  position: absolute;
+  inset: 0;
+  /* SVG feTurbulence fractal noise; %23 = '#' inside the data URI */
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='150'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 150px 112px;
+  opacity: 0.6;
+  animation: tv-static 0.8s steps(8, end) infinite;
+  z-index: 0;
+}
+
+/* "REDACTED" label on top of noise */
+.redacted-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--redacted-label);
+  text-shadow: 0 0 6px var(--redacted-label-glow);
+  z-index: 3;
+}
+
+@keyframes tv-static {
+  0%   { background-position:   0px    0px; }
+  12%  { background-position: -14px    8px; }
+  25%  { background-position:   9px  -16px; }
+  37%  { background-position: -22px    3px; }
+  50%  { background-position:  16px   12px; }
+  62%  { background-position:  -7px  -20px; }
+  75%  { background-position:  20px   -6px; }
+  87%  { background-position: -11px   18px; }
+  100% { background-position:   0px    0px; }
+}
