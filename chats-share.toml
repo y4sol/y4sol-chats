@@ -1,7 +1,7 @@
 # chats-share.toml
 # Configuration for openclaw-chats-share-web.
 
-site = "https://y4sol-chats.pages.dev"
+site = "https://vibe.y4sol.cc"
 base = ""
 
 [template.options]
