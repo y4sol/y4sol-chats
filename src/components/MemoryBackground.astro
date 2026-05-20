@@ -19,6 +19,9 @@
     pointer-events: none;
     z-index: -1;
     overflow: hidden;
+    contain: strict;
+    isolation: isolate;
+    max-width: 100vw;
   }
 
   .memory-orb {
@@ -27,6 +30,7 @@
     filter: blur(80px);
     opacity: 0.4;
     animation: float 25s ease-in-out infinite;
+    max-width: 55vw;
   }
 
   @keyframes float {

@@ -12,6 +12,7 @@
 
 html {
   background: var(--bg-primary);
+  overflow-x: clip;
   overflow-x: hidden;
   width: 100%;
 }
@@ -24,6 +25,7 @@ body {
   min-height: 100vh;
   position: relative;
   width: 100%;
+  overflow-x: hidden;
 }
 
 /* Collapsible process messages: hidden by default; body.show-process reveals them. */
