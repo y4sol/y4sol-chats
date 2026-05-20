@@ -7,7 +7,7 @@ channel: discord
 model: deepseek-v4-flash
 totalMessages: 21
 visibility: public
-defaultShowProcess: true
+defaultShowProcess: false
 
 participants:
   Z3R0:
