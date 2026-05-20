@@ -13,6 +13,9 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://y4sol.github.io/y4sol-chats/
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
